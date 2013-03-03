@@ -9,3 +9,27 @@ Tirando partido das funcionalidades existentes na maioria dos telemóveis que ci
 Os funcionários das autarquias terão também acesso a esta rede e poderão ir dando um feedback em tempo real das situações que resolveram ou estão a resolver. Podem ainda indicar quando irão proceder a essas alterações e que impacto terão sobre o trânsito de modo a evitar as inesperadas filas e buzinões associados.
 Ao colocar os dois lados da questão em contacto, pretende-se ainda promover o debate de modo a que possam surgir mais e melhores soluções a problemas da vizinhança.
 Por outro lado, esta aplicação possuirá uma secção de perdidos e achados de modo a promover uma boa vizinhança.
+
+Componentes
+-----------
+
+* Aplicação Mobile
+
+  Servirá para os utilizadores reportarem problemas, comentarem problemas 
+  já existentes ou classificarem as soluções.
+  Do ponto de vista da equipa de manutenção, servirá para comentarem problemas 
+  relatados, proporem soluções ou darem problemas como resolvidos.
+  
+* Aplicação Web
+
+  Terá todas as funcionalidades da aplicação Mobile e, para além dessas, 
+  perimitirá gerir a aplicação. Nomeadamente, registar utilizadores, classificar
+  utilizadores segundo a capacidade de ralatar os problemas e a veracidade dos
+  mesmo, eleiminar utilizadores, ver estatístcas de problemas por rua, rapidez de
+  resolução, entre outras.
+
+* Base de dados
+
+  Será a base de todos os registos do sistema. Terá o registo de utilizadores, sejam
+  eles moradores ou membros da equipa de manutenção; terá o registos de todos os problemas
+  reportados, comentários e soluções e todos os dados estatíticos que se considerem relevantes.
