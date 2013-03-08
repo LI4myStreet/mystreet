@@ -33,3 +33,10 @@ Componentes
   Será a base de todos os registos do sistema. Terá o registo de utilizadores, sejam
   eles moradores ou membros da equipa de manutenção; terá o registos de todos os problemas
   reportados, comentários e soluções e todos os dados estatíticos que se considerem relevantes.
+  
+Concorrencia
+------------
+Existem uma aplicação chamada FixMyStreet (http://www.fixmystreet.com) que tem uma função semelhante à do nosso programa, mas operando apenas no Reino Unido. Funciona usando as ferramentas da mySociety (http://www.mysociety.org) que fornece feeds de informação, mapas e vários outros suportes.
+Para além deste, várias outras aplicações baseadas no mesmo foram surgindo noutros paises, tal como Canada, Alemanha ou Coreia. Em Portugal a aplicação "A Minha Rua" do portal do cidadão fornece o mesmo serviço, mas devido a uma interface complicada e pouco pratica não tem muita adesão. Um novo projecto do eCivitas também chamada de "A Minha Rua" parece oferecer uma alternativa para freguesias inscritas no projecto, no entanto, não parece estar ainda a funcionar.
+É a nossa intenção criar um projecto fundamentalmente diferente destes, criando uma aplicação que cative as pessoas e as incentive a usar o sistema. Pretendemos criar uma rede social onde os utilizadores podem interagir entre si, e fornecer uma interface simples e prática de usar, criando assim laços entre vizinhos e motivando-os a cuidar melhor do seu bairro. Funcionarios publicos poderão ter acesso a problemas existentes nos locais pelos quais são responsaveis, melhorando assim não só a comunicação com os cidadãos, como também o tempo de resposta a problemas. 
+Finalmente temos também como ambição criar uma aplicação que no futuro possa alargar-se a uma escala global e não limitar-se apenas a um país.
