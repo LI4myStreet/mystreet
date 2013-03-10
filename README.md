@@ -16,7 +16,8 @@ Motivação
 O principal motivo para a escolha deste projeto foi a sua utilidade pública, pois serve as comunidades locais,
 ajundando a resolver problemas específicos de infraestruturas ou a melhorar as condições de vida através de ideias
 e propostas que podem ser votadas e discutidas por todos, mas também porque este tipo de interação fomenta as relações
-interpessoais melhorando, num ambito mais abrangente, a qualidade de vida de todos. 
+interpessoais melhorando, num ambito mais abrangente, a qualidade de vida de todos.
+
 Todos estes aspetos, interpolados para uma visão mais alargada, farão com que seja mais fácil e mais agradável,
 viver ou visitar aldeias, vilas e cidades onde o número de problemas foi reduzido e onde a identidade das pessoas
 que nelas vivem está mais presente no ambiente que as rodeia.
