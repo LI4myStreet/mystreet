@@ -26,26 +26,21 @@ que nelas vivem está mais presente no ambiente que as rodeia.
 Componentes
 -----------
 
-* Aplicação Mobile
+A aplicação pode ser subdividida em três componentes funcionais:
 
-  Servirá para os utilizadores reportarem problemas, comentarem problemas 
-  já existentes ou classificarem as soluções.
-  Do ponto de vista da equipa de manutenção, servirá para comentarem problemas 
-  relatados, proporem soluções ou darem problemas como resolvidos.
-  
 * Aplicação Web
+A aplicação Web será o meio preferencial de interação com a aplicação e conterá todas as funcionalidades que se pretende que a aplicação tenha, desde registro e autenticação de utilizadores a adição de comentários, upload de fotografias, reportação de problemas ou classificação de soluções implementadas.
+Para além destas funcionalidades, conterá ainda uma área de administração que será apenas acessível aos administradores do sistema e permitirá, emitir mapas estatísticos relativos à utilização da aplicação.
 
-  Terá todas as funcionalidades da aplicação Mobile e, para além dessas, 
-  perimitirá gerir a aplicação. Nomeadamente, registar utilizadores, classificar
-  utilizadores segundo a capacidade de relatar os problemas e a veracidade dos
-  mesmos, eliminar utilizadores, ver estatísticas de problemas por rua, rapidez de
-  resolução, entre outras.
+* Aplicação Mobile
+A aplicação Mobile pretende tirar partido das características típicas dos smartphones atuais, quer seja a sua portabilidade e “omnipresença”, quer sejam as suas características físicas como a câmara e gps.
+De um ponto de vista geral, a aplicação mobile será o mais próximo da aplicação Web possível, adaptado às dimensões de um telemóvel e permitindo que as fotografias representativas das ocorrências sejam tiradas de forma imediata a partir da câmara do telemóvel e que a localização da ocorrência possa ser obtida a partir do telemóvel.
 
 * Base de dados
+De modo a garantir a persistência dos dados e ainda o acesso global à aplicação, tudo isto num ambiente em que o sincronismo assume um papel essencial, será necessária a criação de uma base de dados robusta.
+Esta base de dados deverá ser arquitectada de forma a que a sua resposta seja o mais célere possível, por isso a eficiência e escalabilidade da base de dados serão pontos fulcrais a ter em atenção no desenrolar deste projeto. 
+A base de dados deverá ter a capacidade de armazenar utilizadores, problemas reportados, comentários, pontos de interesse, marcadores do mapa, fotografias, perdidos e achados, entre outros pontos que se achem relevantes.
 
-  Será a base de todos os registos do sistema. Terá o registo de utilizadores, sejam
-  eles moradores ou membros da equipa de manutenção; terá o registos de todos os problemas
-  reportados, comentários e soluções e todos os dados estatíticos que se considerem relevantes.
   
 Concorrência
 ------------
