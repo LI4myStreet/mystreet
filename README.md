@@ -6,18 +6,16 @@ Descrição
 
 __MyStreet__ será uma rede social que irá permitir a todos os utilizadores reportarem os mais variados problemas que possam surgir na sua vizinhança num ambiente informal e em que a interactividade assumirá um papel chave.
 Tirando partido das funcionalidades existentes na maioria dos telemóveis que circulam hoje em dia, o utilizador poderá reportar situações como, por exemplo, luzes fundidas, buracos na estrada, falhas de energia, grafitis ofensivos, apenas "postando" a situação e identificando o local (seja de forma automática, preenchimento de morada ou selecção em mapa), podendo ainda adicionar fotografias demonstrativas.
-Os funcionários das autarquias terão também acesso a esta rede e poderão ir dando um feedback em tempo real das situações que resolveram ou estão a resolver. Por outro lado, os funcionários poderão usar esta rede para informar quando irão proceder a essas alterações e qual o impacto esperado sobre o trânsito de modo a evitar as inesperadas filas e buzinões associados.
-Ao colocar os dois lados da questão em contacto, pretende-se ainda promover o debate de modo a que possam surgir mais e melhores soluções a problemas da vizinhança.
+Os funcionários das autarquias terão também acesso a esta rede e poderão ir dando um feedback em tempo real das situações que resolveram ou estão a resolver. Por outro lado, os funcionários poderão usar esta rede para informar quando irão proceder a essas alterações e qual o impacto esperado sobre o trânsito, evitando as inesperadas filas e buzinões associados.
+Ao colocar os dois lados da questão em contacto, pretende-se ainda promover o debate, de modo a que possam surgir mais e melhores soluções a problemas da vizinhança.
 Por outro lado, esta aplicação possuirá uma secção de perdidos e achados que permitirá informar a vizinhança de objectos que se tenham encontrado ou então de objectos que se tenham perdido e se pretendam recuperar, tudo em prol de uma boa vizinhança.
 
 Motivação
 ---------
 
-O principal motivo para a escolha deste projeto foi a sua utilidade pública, pois serve as comunidades locais,
-ajundando a resolver problemas específicos de infraestruturas ou a melhorar as condições de vida através de ideias
-e propostas que podem ser votadas e discutidas por todos, mas também porque este tipo de interação fomenta as relações
-interpessoais melhorando, num ambito mais abrangente, a qualidade de vida de todos.
-
+O principal motivo para a escolha deste projeto foi a sua utilidade pública. O principal objectivo deste projecto é servir as comunidades locais, ajudando a resolver problemas específicos de infraestruturas ou a melhorar as condições de vida através de ideias
+e propostas que podem ser votadas e discutidas por todos.
+Por outro lado, este tipo de interação fomenta as relações interpessoais melhorando, num ambito mais abrangente, a qualidade de vida de todos.
 Todos estes aspetos, interpolados para uma visão mais alargada, farão com que seja mais fácil e mais agradável,
 viver ou visitar aldeias, vilas e cidades onde o número de problemas foi reduzido e onde a identidade das pessoas
 que nelas vivem está mais presente no ambiente que as rodeia.
