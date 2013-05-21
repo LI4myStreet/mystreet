@@ -46,5 +46,5 @@ CREATE TABLE Localidades (LocalidadeID int NOT NULL UNIQUE, Nome varchar(400) NU
 CREATE TABLE Classificacao (UtilizadorID int NOT NULL UNIQUE, IntervencaoID int NOT NULL UNIQUE, Valor int NOT NULL);
 CREATE TABLE Tags (TagID int NOT NULL UNIQUE, Descricao varchar(255) NOT NULL UNIQUE);
 CREATE TABLE Comentarios (UtilizadorID int NOT NULL UNIQUE, OcorrenciaID int NOT NULL UNIQUE, Conteudo int NOT NULL, ImagemID varchar(255) NULL UNIQUE, ComentarioID int NOT NULL UNIQUE);
-CREATE TABLE Ocorrencia (UtilizadorID int NOT NULL UNIQUE, OcorrenciaID int NOT NULL UNIQUE, Descricao int NOT NULL, Estado varchar(255) NOT NULL, Morada varchar(255) NULL, Coordenadas varchar(255) NULL);
+CREATE TABLE Ocorrencia (UtilizadorID int NOT NULL UNIQUE, OcorrenciaID int NOT NULL UNIQUE, Descricao varchar(255) NOT NULL, Estado varchar(255) NOT NULL, Morada varchar(255) NULL, Coordenadas varchar(255) NULL);
 CREATE TABLE Utilizador (UtilizadorID int NOT NULL UNIQUE, Nome varchar(255) NOT NULL, Morada varchar(255) NOT NULL, Tipo char(1) NOT NULL, Login varchar(255) NOT NULL, Password varchar(255) NOT NULL, LocalidadeID int NULL);
