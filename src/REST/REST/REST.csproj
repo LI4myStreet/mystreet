@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UtilizadorController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -130,9 +131,12 @@
     <Compile Include="Models\Comentario.cs" />
     <Compile Include="Models\Intervencao.cs" />
     <Compile Include="Models\Localidade.cs" />
+    <Compile Include="Models\MyStreetContext.cs" />
+    <Compile Include="Models\MyStreetContextInitializer.cs" />
     <Compile Include="Models\Ocorrencia.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Utilizador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -172,7 +176,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49601</DevelopmentServerPort>
+          <DevelopmentServerPort>49903</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
