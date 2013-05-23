@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Runtime.Serialization;
 using System.Net;
 using System.IO;
+using myStreet.HttpUtils;
 
 namespace myStreet.Account
 {
@@ -25,14 +26,20 @@ namespace myStreet.Account
 
             try
             {
-                username = Request.Form["UserName"].ToString();
-                pass = Request.Form["Password"].ToString();
+                username = LoginUser.UserName;
+                pass = LoginUser.Password;
 
-                WebClient proxy = new WebClient();
-                byte[] abc = proxy.DownloadData((new Uri("http://localhost:4567/Service1.svc/GetData")));
-                Stream strm = new MemoryStream(abc);
-                DataContractSerializer obj = new DataContractSerializer(typeof(string));
-                content = obj.ReadObject(strm).ToString();
+                string endPoint = @"http://localhost:49903/api/utilizador/";
+                var client = new RestClient(endPoint);
+                var json = client.MakeRequest("?username=bmm&password=123456");
+
+                //WebClient proxy = new WebClient();
+                //byte[] abc = proxy.DownloadData((new Uri("http://localhost:49903/api/utilizador/?username=bmm&password=123456")));
+                //Stream strm = new MemoryStream(abc);
+                //DataContractSerializer obj = new DataContractSerializer(typeof(string));
+                //content = obj.ReadObject(strm).ToString();
+
+                Response.Redirect("~/Default.aspx?un=" + LoginUser.UserName.ToString());
             }
             catch (Exception ex)
             {

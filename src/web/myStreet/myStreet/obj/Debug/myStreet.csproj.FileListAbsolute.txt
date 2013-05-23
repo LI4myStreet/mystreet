@@ -1,0 +1,4 @@
+C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\bin\myStreet.dll
+C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\bin\myStreet.pdb
+C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\obj\Debug\myStreet.dll
+C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\obj\Debug\myStreet.pdb
