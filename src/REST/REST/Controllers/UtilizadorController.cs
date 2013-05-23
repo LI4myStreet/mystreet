@@ -35,16 +35,9 @@ namespace REST.Controllers
         }
 
         // GET api/Utilizador/?username=u&password=p
-        public string GetUtilizador(string username, string password)
-        {
-            try
-            {
-                return db.Utilizadores.First(u => u.Username == username && u.Password == password) != null ? "OK" : "Not OK";
-            }
-            catch (InvalidOperationException)
-            {
-                return "Not OK";
-            }
+        public Utilizador GetUtilizador(string username, string password)
+        {            
+            return db.Utilizadores.FirstOrDefault(u => u.Username == username && u.Password == password);            
         }
 
         // PUT api/Utilizador/5
