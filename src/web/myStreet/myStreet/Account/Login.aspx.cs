@@ -8,6 +8,8 @@ using System.Runtime.Serialization;
 using System.Net;
 using System.IO;
 using myStreet.HttpUtils;
+using System.Web.Security;
+using System.Xml.Serialization;
 
 namespace myStreet.Account
 {
@@ -22,7 +24,7 @@ namespace myStreet.Account
         {
             string username;
             string pass;
-            string content;
+            Models.Utilizador utilizador;
 
             try
             {
@@ -31,19 +33,20 @@ namespace myStreet.Account
 
                 string endPoint = @"http://localhost:49903/api/utilizador/";
                 var client = new RestClient(endPoint);
-                var json = client.MakeRequest("?username=bmm&password=123456");
+                string json = client.MakeRequest("?username=" + username + "&password=" + pass);
+                json = json.Replace("REST.Models", "myStreet.Models");
 
-                //WebClient proxy = new WebClient();
-                //byte[] abc = proxy.DownloadData((new Uri("http://localhost:49903/api/utilizador/?username=bmm&password=123456")));
-                //Stream strm = new MemoryStream(abc);
-                //DataContractSerializer obj = new DataContractSerializer(typeof(string));
-                //content = obj.ReadObject(strm).ToString();
+                utilizador = (Models.Utilizador)HttpUtils.Serialization.XmlDeserializeFromString(json, typeof(Models.Utilizador));
 
-                Response.Redirect("~/Default.aspx?un=" + LoginUser.UserName.ToString());
+                if (utilizador != null)
+                {
+                    FormsAuthentication.RedirectFromLoginPage(utilizador.Username, LoginUser.RememberMeSet);
+                    //Response.Redirect("~/Default.aspx?un=" + LoginUser.UserName.ToString());
+                }
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('" + ex.Message.ToString() + "');</script>");
+                //Response.Write("<script>alert('" + ex.Message.ToString() + "');</script>");
             }
 
         }
