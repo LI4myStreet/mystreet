@@ -63,6 +63,8 @@ namespace myStreet.HttpUtils
             request.Method = Method.ToString();
             request.ContentLength = 0;
             request.ContentType = ContentType;
+            //Todo: Verificar se está é a melhor forma de validar os certificados
+            ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
 
             if (!string.IsNullOrEmpty(PostData) && Method == HttpVerb.POST)
             {
@@ -98,6 +100,11 @@ namespace myStreet.HttpUtils
 
                 return responseValue;
             }
+        }
+
+        public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
+        {
+            return true;
         }
 
     } // class
