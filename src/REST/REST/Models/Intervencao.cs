@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace REST.Models
 {
     public class Intervencao
     {
-        int ID { get; set; }
-        int UtilID { get; set; }
-        int OID { get; set; }
-        string Descricao { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
+        [Required]
+        public int UtilID { get; set; }
+        [Required]
+        public int OID { get; set; }
+        [Required, MaxLength(255)]
+        public string Descricao { get; set; }
 
         public Intervencao()
         {
@@ -40,7 +47,7 @@ namespace REST.Models
             return string.Format("Intervencao: {0}\n",Descricao);
         }
 
-        public override bool Equals(object obj)
+        public bool Compara(object obj)
         {
             if (obj == null) return false;
             Intervencao i = obj as Intervencao;
@@ -48,5 +55,6 @@ namespace REST.Models
             if (ID==i.ID&&UtilID==i.UtilID&&OID==i.OID&&Descricao.Equals(i.Descricao)) return true;
             return false;
         }
+
     }
 }

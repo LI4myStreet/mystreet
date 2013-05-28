@@ -7,12 +7,12 @@ namespace REST.Models
 {
     public class Ocorrencia
     {
-        int ID { get; set; }
-        int UtilID { get; set; }
-        string Descricao { get; set; }
-        string Estado { get; set; }
-        string Morada { get; set; }
-        string Coordenadas { get; set; }
+        public int ID { get; set; }
+        public int UtilID { get; set; }
+        public string Descricao { get; set; }
+        public string Estado { get; set; }
+        public string Morada { get; set; }
+        public string Coordenadas { get; set; }
 
         public Ocorrencia()
         {
@@ -58,7 +58,7 @@ namespace REST.Models
             return string.Format("Ocurrencia: \nDescricao: {0}\nEstado: {1}\nMorada: {2}\nCoordenadas: {3}\n",Descricao,Estado,Morada,Coordenadas);
         }
 
-        public override bool Equals(object obj)
+        public bool Compara(object obj)
         {
             if (obj == null) return false;
             Ocorrencia o = obj as Ocorrencia;

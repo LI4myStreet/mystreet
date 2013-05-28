@@ -7,11 +7,11 @@ namespace REST.Models
 {
     public class Comentario
     {
-        int ID { get; set; }
-        int UtilID { get; set; }
-        int OID { get; set; }
-        string Conteudo { get; set; }
-        string ImgID { get; set; }
+        public int ID { get; set; }
+        public int UtilID { get; set; }
+        public int OID { get; set; }
+        public string Conteudo { get; set; }
+        public string ImgID { get; set; }
 
         public Comentario()
         {
@@ -52,7 +52,7 @@ namespace REST.Models
             return string.Format("Comentario: \nConteudo: {0}\nImagem: {1}\n",Conteudo,ImgID);
         }
 
-        public override bool Equals(object obj)
+        public bool Compara(object obj)
         {
             if (obj == null) return false;
             Comentario c = obj as Comentario;

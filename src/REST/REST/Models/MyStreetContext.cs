@@ -18,5 +18,6 @@ namespace REST.Models
         }
 
         public DbSet<Utilizador> Utilizadores { get; set; }
+        public DbSet<Intervencao> Intervencoes { get; set; }
     }
 }

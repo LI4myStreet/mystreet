@@ -2,17 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace REST.Models
 {
     public class User
     {
-        int UtilID { get; set; }
-        string Nome { get; set; }
-        string Morada { get; set; }
-        int Tipo { get; set; }
-        string Login { get; set; }
-        string Password { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int UtilID { get; set; }
+        [Required, MaxLength(255)]
+        public string Nome { get; set; }
+        [Required, MaxLength(255)]
+        public string Morada { get; set; }
+        [Required, MaxLength(1)]
+        public int Tipo { get; set; }
+        [Required, MaxLength(255)]
+        public string Login { get; set; }
+        [Required, MaxLength(255)]
+        public string Password { get; set; }
 
         public User()
         {
@@ -58,7 +66,7 @@ namespace REST.Models
             return string.Format("User: {0}\nNome: {1}\nMorada: {2}\n",Login,Nome,Morada);
         }
 
-        public override bool Equals(object obj)
+        public bool Compara(object obj)
         {
             if (obj == null) return false;
             User u = obj as User;

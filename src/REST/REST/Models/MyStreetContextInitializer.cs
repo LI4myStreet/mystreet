@@ -17,6 +17,14 @@ namespace REST.Models
 
             utilizadores.ForEach(p => context.Utilizadores.Add(p));
             context.SaveChanges();
+
+            var intervencoes = new List<Intervencao>()
+            {
+                new Intervencao() { UtilID = 1, OID = 1, Descricao = "Test quacker!" } 
+            };
+
+            intervencoes.ForEach(p => context.Intervencoes.Add(p));
+            context.SaveChanges();
         }
     }
 }

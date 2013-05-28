@@ -7,10 +7,10 @@ namespace REST.Models
 {
     public class Classificacao
     {
-        int ID { get; set; }
-        int UtilID { get; set; }
-        int InterID { get; set; }
-        int Valor { get; set; }
+        public int ID { get; set; }
+        public int UtilID { get; set; }
+        public int InterID { get; set; }
+        public int Valor { get; set; }
 
         public Classificacao()
         {
@@ -40,7 +40,7 @@ namespace REST.Models
             return string.Format("Classificacao: {0}",Valor);
         }
 
-        public override bool Equals(object obj)
+        public bool Compara(object obj)
         {
             if (obj == null) return false;
             Classificacao c = obj as Classificacao;

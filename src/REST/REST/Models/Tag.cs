@@ -7,8 +7,8 @@ namespace REST.Models
 {
     public class Tag
     {
-        int ID { get; set; }
-        string Descricao { get; set; }
+        public int ID { get; set; }
+        public string Descricao { get; set; }
 
         public Tag()
         {
@@ -32,7 +32,7 @@ namespace REST.Models
             return string.Format("Tag: {0}\n",Descricao);
         }
 
-        public override bool Equals(object obj)
+        public bool Compara(object obj)
         {
             if (obj == null) return false;
             Tag t = obj as Tag;
