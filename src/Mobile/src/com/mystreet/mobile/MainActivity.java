@@ -1,15 +1,18 @@
 package com.mystreet.mobile;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.app.Activity;
 import android.view.Menu;
+import android.widget.TextView;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		new RestAsyncTask().execute();
 	}
 
 	@Override
@@ -18,5 +21,17 @@ public class MainActivity extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	class RestAsyncTask extends AsyncTask<Void, Void, String> {
 
+		@Override
+		protected String doInBackground(Void... params) {
+			return RestService.GetSomething();
+		}
+		
+		protected void onPostExecute(String result) {
+			TextView tv = (TextView)findViewById(R.id.textView1);
+			tv.setText(result);
+		}
+	}
 }
