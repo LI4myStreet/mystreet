@@ -32,11 +32,17 @@ namespace REST.Controllers
             return ocorrencia;
         }
 
-        public IEnumerable<Ocorrencia> GetOcorrenciasLocalidade(string morada)
+        public IEnumerable<Ocorrencia> GetOcorrenciasMorada(string morada)
         {
             return db.Ocorrencias.Where(
                 (o) => string.Equals(o.Morada, morada,
                     StringComparison.OrdinalIgnoreCase));
+        }
+
+        public IEnumerable<Ocorrencia> GetOcorrenciasLocalidade(int localid)
+        {
+            return db.Ocorrencias.Where(
+                (o) => (o.LocalidadeID==localid));
         }
 
         // PUT api/Ocorrencias/5

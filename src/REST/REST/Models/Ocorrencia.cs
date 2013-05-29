@@ -13,6 +13,8 @@ namespace REST.Models
         public int Id { get; set; }
         [Required]
         public int UtilizadorID { get; set; }
+        [Required]
+        public int LocalidadeID { get; set; }
         [Required, MaxLength(255)]
         public string Descricao { get; set; }
         [Required, MaxLength(255)]
