@@ -38,6 +38,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.mystreet.mobile.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize|stateVisible" >        
+        </activity>
         <meta-data
     		android:name="com.google.android.maps.v2.API_KEY"
     		android:value="AIzaSyDjWEAg8gmp7x1BtIjEBNK1iScJFN7fRnY" />

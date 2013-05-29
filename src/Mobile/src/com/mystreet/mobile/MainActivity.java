@@ -8,13 +8,14 @@ import org.json.JSONException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
@@ -31,8 +32,8 @@ public class MainActivity extends Activity {
 		this.ocorrencias  = new ArrayList<Ocorrencia>();
 		this.alertBuilder = new AlertDialog.Builder(this);
 		
-		final Button button = (Button) findViewById(R.id.btnSearch);
-        button.setOnClickListener(new View.OnClickListener() {
+		final ImageButton btnSearch = (ImageButton) findViewById(R.id.btnImgSearch);
+        btnSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	EditText searchFilter = (EditText)findViewById(R.id.etSearch);
             	filter = searchFilter.getText().toString();
@@ -40,6 +41,14 @@ public class MainActivity extends Activity {
             }
         });
 		
+        final ImageButton btnLogin = (ImageButton) findViewById(R.id.imgBtnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            	startActivity(i);
+            }
+        });
+        
 		this.rest = new RestClient("http://10.0.2.2:2000/api");
 		new RestAsyncTask().execute();
 	}

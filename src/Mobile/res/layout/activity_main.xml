@@ -19,21 +19,29 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:ems="10"
+            android:ems="9"
             android:inputType="text" >
 
             <requestFocus />
         </EditText>
 
-        <Button
-            android:id="@+id/btnSearch"
-            style="?android:attr/buttonStyleSmall"
+        <ImageButton
+            android:id="@+id/imgBtnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/login_or_register"
+            android:src="@drawable/ic_stat_login" />
+
+        <ImageButton
+            android:id="@+id/btnImgSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/etSearch"
-            android:minHeight="48dip"
-            android:text="@string/search" />
+            android:layout_toLeftOf="@+id/imgBtnLogin"
+            android:contentDescription="@string/search"
+            android:src="@drawable/ic_stat_search" />
 
     </RelativeLayout>
 

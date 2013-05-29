@@ -36,7 +36,7 @@ public class LoginActivity extends Activity {
 	/**
 	 * The default email to populate the email field with.
 	 */
-	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
+	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";	
 
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
@@ -53,6 +53,9 @@ public class LoginActivity extends Activity {
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
+	
+	// Rest interaction
+	RestClient rest;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +93,8 @@ public class LoginActivity extends Activity {
 						attemptLogin();
 					}
 				});
+		
+		this.rest = new RestClient("http://10.0.2.2:2000/api");
 	}
 
 	@Override
@@ -204,31 +209,10 @@ public class LoginActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			HttpClient client = new DefaultHttpClient();
-		    String request = String.format("http://192.168.1.71/REST/api/utilizadores/?username=%s&password=%s", mEmail, mPassword);
-		    HttpGet httpGet = new HttpGet(request);
-		    try {
-		      HttpResponse response = client.execute(httpGet);
-		      StatusLine statusLine = response.getStatusLine();
-		      int statusCode = statusLine.getStatusCode();
-		      if (statusCode == 200) {
-		        HttpEntity entity = response.getEntity();
-		        InputStream content = entity.getContent();
-		        BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-		        String line = reader.readLine();	        
-		        if(line.equals("null")) return false;
-		        else return true;
-		      } else {
-		        return false;
-		      }
-		    } catch (ClientProtocolException e) {
-		      e.printStackTrace();
-		    } catch (IOException e) {
-		      e.printStackTrace();
-		    }
-
+			return LoginActivity.this.rest.isValidLogin(mEmail, mPassword);
+			
 		    // TODO: register the new account here.
-			return false;
+			//return false;
 		}
 
 		@Override
