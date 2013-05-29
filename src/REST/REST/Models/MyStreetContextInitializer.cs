@@ -32,7 +32,9 @@ namespace REST.Models
 
             var occorrencias = new List<Ocorrencia>()
             {
-                new Ocorrencia() { Descricao = "Uma descrição", Coordenadas = "0.120,0.1234", Estado = "Um estado", Morada = "Rua", Utilizador = utilizadores[0] }
+                new Ocorrencia() { Descricao = "Passeio estragado", Coordenadas = "0.120,0.1234", Estado = "Reportado", Morada = "Rua dos Moinhos, Macieira da Maia", Utilizador = utilizadores[1] },
+                new Ocorrencia() { Descricao = "Lâmpada fundida", Coordenadas = "0.120,0.1234", Estado = "Reportado", Morada = "Av. Liberdade, Braga", Utilizador = utilizadores[2] },
+                new Ocorrencia() { Descricao = "Muro caído", Coordenadas = "0.120,0.1234", Estado = "Em estudo", Morada = "Rua Nova St. Cruz, Braga", Utilizador = utilizadores[3] }                
             };
 
             occorrencias.ForEach(o => context.Ocorrencias.Add(o));
