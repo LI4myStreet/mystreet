@@ -2,6 +2,7 @@ package com.mystreet.mobile;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Locale;
 
 import org.json.JSONException;
 
@@ -10,19 +11,34 @@ import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
 	private RestClient rest;
 	private AlertDialog.Builder alertBuilder;
+	private Collection<Ocorrencia> ocorrencias;
+	private String filter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		this.ocorrencias  = new ArrayList<Ocorrencia>();
 		this.alertBuilder = new AlertDialog.Builder(this);
+		
+		final Button button = (Button) findViewById(R.id.btnSearch);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	EditText searchFilter = (EditText)findViewById(R.id.etSearch);
+            	filter = searchFilter.getText().toString();
+            	updateOcorrencias();
+            }
+        });
 		
 		this.rest = new RestClient("http://10.0.2.2:2000/api");
 		new RestAsyncTask().execute();
@@ -33,6 +49,23 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	void updateOcorrencias() {
+		ListView lv = (ListView)findViewById(R.id.lvOcorrencias);
+		
+		ArrayList<String> descricoes = new ArrayList<String>();
+		
+		for(Ocorrencia o : ocorrencias) {
+			if(this.filter == null 
+					|| this.filter.equals("") 
+					|| o.getDescricao().toLowerCase(Locale.getDefault()).contains(this.filter.toLowerCase(Locale.getDefault()))) { 
+				descricoes.add(o.getDescricao());
+			}
+		}
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.listview_row, descricoes);
+	    lv.setAdapter(adapter);
 	}
 	
 	class RestAsyncTask extends AsyncTask<Void, Void, Collection<Ocorrencia>> {
@@ -57,15 +90,8 @@ public class MainActivity extends Activity {
 				return;
 			}
 
-			ArrayList<String> descricoes = new ArrayList<String>();
-			for(Ocorrencia o : ocorrencias) {
-				descricoes.add(o.getDescricao());
-			}
-			
-			ListView lv = (ListView)findViewById(R.id.lvOcorrencias);
-			
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.listview_row, descricoes);
-		    lv.setAdapter(adapter);
+			MainActivity.this.ocorrencias = ocorrencias;
+			updateOcorrencias();
 		}
 	}
 }
