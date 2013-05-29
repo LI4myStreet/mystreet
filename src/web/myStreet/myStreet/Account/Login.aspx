@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeBehind="Login.aspx.cs" Inherits="myStreet.Account.Login" %>
 
+<%@ Register assembly="SharpMap.Web" namespace="SharpMap.Web.UI.Ajax" tagprefix="cc1" %>
+
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
@@ -47,4 +49,5 @@
             </div>
         </LayoutTemplate>
     </asp:Login>
+    <br />
 </asp:Content>

@@ -33,7 +33,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\bin\Common.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NetTopologySuite">
+      <HintPath>..\bin\NetTopologySuite.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PowerCollections">
+      <HintPath>..\bin\PowerCollections.dll</HintPath>
+    </Reference>
+    <Reference Include="ProjNet">
+      <HintPath>..\bin\ProjNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -58,6 +73,58 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="bootstrap\css\bootstrap-responsive.css" />
+    <Content Include="bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="bootstrap\css\bootstrap.css" />
+    <Content Include="bootstrap\css\bootstrap.min.css" />
+    <Content Include="bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="bootstrap\js\bootstrap.js" />
+    <Content Include="bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\OpenLayers.js" />
+    <Content Include="Scripts\theme\default\google.css" />
+    <Content Include="Scripts\theme\default\google.tidy.css" />
+    <Content Include="Scripts\theme\default\ie6-style.css" />
+    <Content Include="Scripts\theme\default\ie6-style.tidy.css" />
+    <Content Include="Scripts\theme\default\img\add_point_off.png" />
+    <Content Include="Scripts\theme\default\img\add_point_on.png" />
+    <Content Include="Scripts\theme\default\img\blank.gif" />
+    <Content Include="Scripts\theme\default\img\close.gif" />
+    <Content Include="Scripts\theme\default\img\drag-rectangle-off.png" />
+    <Content Include="Scripts\theme\default\img\drag-rectangle-on.png" />
+    <Content Include="Scripts\theme\default\img\draw_line_off.png" />
+    <Content Include="Scripts\theme\default\img\draw_line_on.png" />
+    <Content Include="Scripts\theme\default\img\draw_point_off.png" />
+    <Content Include="Scripts\theme\default\img\draw_point_on.png" />
+    <Content Include="Scripts\theme\default\img\draw_polygon_off.png" />
+    <Content Include="Scripts\theme\default\img\draw_polygon_on.png" />
+    <Content Include="Scripts\theme\default\img\editing_tool_bar.png" />
+    <Content Include="Scripts\theme\default\img\move_feature_off.png" />
+    <Content Include="Scripts\theme\default\img\move_feature_on.png" />
+    <Content Include="Scripts\theme\default\img\navigation_history.png" />
+    <Content Include="Scripts\theme\default\img\overview_replacement.gif" />
+    <Content Include="Scripts\theme\default\img\pan-panel-NOALPHA.png" />
+    <Content Include="Scripts\theme\default\img\pan-panel.png" />
+    <Content Include="Scripts\theme\default\img\panning-hand-off.png" />
+    <Content Include="Scripts\theme\default\img\panning-hand-on.png" />
+    <Content Include="Scripts\theme\default\img\pan_off.png" />
+    <Content Include="Scripts\theme\default\img\pan_on.png" />
+    <Content Include="Scripts\theme\default\img\remove_point_off.png" />
+    <Content Include="Scripts\theme\default\img\remove_point_on.png" />
+    <Content Include="Scripts\theme\default\img\ruler.png" />
+    <Content Include="Scripts\theme\default\img\save_features_off.png" />
+    <Content Include="Scripts\theme\default\img\save_features_on.png" />
+    <Content Include="Scripts\theme\default\img\view_next_off.png" />
+    <Content Include="Scripts\theme\default\img\view_next_on.png" />
+    <Content Include="Scripts\theme\default\img\view_previous_off.png" />
+    <Content Include="Scripts\theme\default\img\view_previous_on.png" />
+    <Content Include="Scripts\theme\default\img\zoom-panel-NOALPHA.png" />
+    <Content Include="Scripts\theme\default\img\zoom-panel.png" />
+    <Content Include="Scripts\theme\default\style.css" />
+    <Content Include="Scripts\theme\default\style.mobile.css" />
+    <Content Include="Scripts\theme\default\style.mobile.tidy.css" />
+    <Content Include="Scripts\theme\default\style.tidy.css" />
+    <Content Include="Styles\App_LocalResources\logo.jpg" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -145,6 +212,9 @@
   <ItemGroup>
     <Content Include="Account\Web.config" />
     <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

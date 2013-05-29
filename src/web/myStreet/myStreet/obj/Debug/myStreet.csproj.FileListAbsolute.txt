@@ -1,5 +1,11 @@
 C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\bin\myStreet.dll
 C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\bin\myStreet.pdb
+C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\bin\Common.Logging.dll
+C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\bin\NetTopologySuite.dll
+C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\bin\Newtonsoft.Json.dll
+C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\bin\PowerCollections.dll
+C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\bin\ProjNet.dll
+C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\bin\GeoAPI.dll
+C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\bin\Newtonsoft.Json.xml
 C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\obj\Debug\myStreet.dll
 C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\obj\Debug\myStreet.pdb
-C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\obj\Debug\myStreet.csprojResolveAssemblyReference.cache
