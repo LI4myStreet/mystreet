@@ -25,6 +25,14 @@ namespace REST.Models
 
             intervencoes.ForEach(p => context.Intervencoes.Add(p));
             context.SaveChanges();
+
+            var occorrencias = new List<Ocorrencia>()
+            {
+                new Ocorrencia() { Descricao = "Uma descrição", Coordenadas = "0.120,0.1234", Estado = "Um estado", Morada = "Rua", Utilizador = utilizadores[0] }
+            };
+
+            occorrencias.ForEach(o => context.Ocorrencias.Add(o));
+            context.SaveChanges();
         }
     }
 }
