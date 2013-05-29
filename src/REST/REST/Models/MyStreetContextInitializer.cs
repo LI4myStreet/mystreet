@@ -6,13 +6,17 @@ using System.Data.Entity;
 
 namespace REST.Models
 {
-    public class MyStreetContextInitializer : DropCreateDatabaseIfModelChanges<MyStreetContext>
+    public class MyStreetContextInitializer : DropCreateDatabaseAlways<MyStreetContext>
     {
         protected override void Seed(MyStreetContext context)
         {
             var utilizadores = new List<Utilizador>()
             {
-                new Utilizador() { Nome = "Bruno Matos", Morada = "Rua de cima", Username = "bmm", Password = "123456", Tipo = "A" } 
+                new Utilizador() { Nome = "Miguel Fernandes", Morada = "Braga", Username = "mpf", Password = "123456", Tipo = "A" },
+                new Utilizador() { Nome = "Bruno Matos", Morada = "Macieira da Maia", Username = "bmm", Password = "123456", Tipo = "U" },
+                new Utilizador() { Nome = "Jorge Rodrigues", Morada = "Braga", Username = "jr", Password = "123456", Tipo = "U" },
+                new Utilizador() { Nome = "Rui Silva", Morada = "Braga", Username = "rs", Password = "123456", Tipo = "U" },
+                new Utilizador() { Nome = "Carlos Cosio", Morada = "Espanha", Username = "cc", Password = "123456", Tipo = "F" }
             };
 
             utilizadores.ForEach(p => context.Utilizadores.Add(p));
