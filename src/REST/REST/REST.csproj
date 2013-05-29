@@ -124,7 +124,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntervencaoController.cs" />
     <Compile Include="Controllers\OcorrenciasController.cs" />
-    <Compile Include="Controllers\UtilizadorController.cs" />
+    <Compile Include="Controllers\UtilizadoresController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

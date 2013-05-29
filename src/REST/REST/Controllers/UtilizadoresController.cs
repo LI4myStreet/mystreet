@@ -12,12 +12,12 @@ using REST.Models;
 
 namespace REST.Controllers
 {
-    public class UtilizadorController : ApiController
+    public class UtilizadoresController : ApiController
     {
         private MyStreetContext db = new MyStreetContext();
 
         // GET api/Utilizador
-        public IEnumerable<Utilizador> GetUtilizadors()
+        public IEnumerable<Utilizador> GetUtilizadores()
         {
             return db.Utilizadores.AsEnumerable();
         }
@@ -37,7 +37,13 @@ namespace REST.Controllers
         // GET api/Utilizador/?username=u&password=p
         public Utilizador GetUtilizador(string username, string password)
         {            
-            return db.Utilizadores.FirstOrDefault(u => u.Username == username && u.Password == password);            
+            Utilizador utilizador = db.Utilizadores.FirstOrDefault(u => u.Username == username && u.Password == password);
+            if (utilizador == null)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+            }
+
+            return utilizador;
         }
 
         // PUT api/Utilizador/5
@@ -82,7 +88,7 @@ namespace REST.Controllers
             }
         }
 
-        // DELETE api/Utilizador/5
+        // DELETE api/Utilizadores/5
         public HttpResponseMessage DeleteUtilizador(int id)
         {
             Utilizador utilizador = db.Utilizadores.Find(id);
