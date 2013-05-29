@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
 namespace REST.Models
 {
@@ -19,7 +20,7 @@ namespace REST.Models
         public string Username { get; set; }
         [Required, MaxLength(255)]
         public string Password { get; set; }
-        [Required, MaxLength(1)]
+        [Required, MaxLength(1), DefaultValue("U")]
         public string Tipo { get; set; }
     }
 }
