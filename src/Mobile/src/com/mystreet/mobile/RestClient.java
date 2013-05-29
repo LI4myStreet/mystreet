@@ -32,11 +32,20 @@ public class RestClient {
 		this.client = new DefaultHttpClient();
 	}
 	
-	public boolean isValidLogin(String username, String password) {
+	public Utilizador isValidLogin(String username, String password) throws JSONException {
 		String response = get("/utilizadores/?username="+username+"&password="+password);
-		if(response == null) return false;
+		if(response == null) return null;
 		
-		return true;
+		JSONObject jsonUtilizador = new JSONObject(response);
+		Utilizador utilizador = new Utilizador();
+		
+		utilizador.setId(jsonUtilizador.getInt("Id"));
+		utilizador.setUsername(jsonUtilizador.getString("Username"));
+		utilizador.setPassword(jsonUtilizador.getString("Password"));
+		utilizador.setNome(jsonUtilizador.getString("Nome"));
+		utilizador.setMorada(jsonUtilizador.getString("Morada"));
+		
+		return utilizador;
 	}
 	
 	public void criaUtilizador(Utilizador utilizador) {

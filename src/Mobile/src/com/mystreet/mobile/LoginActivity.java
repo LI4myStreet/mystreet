@@ -1,9 +1,12 @@
 package com.mystreet.mobile;
 
+import org.json.JSONException;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -46,15 +49,17 @@ public class LoginActivity extends Activity {
 	private TextView mLoginStatusMessageView;
 	private EditText mNameView;
 	private EditText mAddressView;
+		
+	// Alter window
+	private AlertDialog.Builder alertBuilder;
 	
-	// Rest interaction
-	RestClient rest;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_login);
+		
+		this.alertBuilder = new AlertDialog.Builder(this);
 
 		// Set up the login form.
 		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
@@ -97,8 +102,6 @@ public class LoginActivity extends Activity {
 						register();
 					}
 				});
-		
-		this.rest = new RestClient("http://10.0.2.2:2000/api");
 	}
 
 	@Override
@@ -276,22 +279,32 @@ public class LoginActivity extends Activity {
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
 	 */
-	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+	public class UserLoginTask extends AsyncTask<Void, Void, Utilizador> {
+		private String error = null;
+		
 		@Override
-		protected Boolean doInBackground(Void... params) {
-			return LoginActivity.this.rest.isValidLogin(mEmail, mPassword);
-			
-		    // TODO: register the new account here.
-			//return false;
+		protected Utilizador doInBackground(Void... params) {
+			try {
+				return MainActivity.restClient.isValidLogin(mEmail, mPassword);
+			} catch (JSONException e) {
+				error = e.getLocalizedMessage();
+				e.printStackTrace();
+			}
+			return null;
 		}
 
 		@Override
-		protected void onPostExecute(final Boolean success) {
+		protected void onPostExecute(final Utilizador utilizador) {
 			mAuthTask = null;
 			showProgress(false);
 
-			if (success) {
+			if (utilizador != null) {
+				((MyStreeApplication)getApplication()).setUtilizador(utilizador);
 				finish();
+			} else if(error != null) {
+				alertBuilder.setMessage("Erro ao receber o utilizador: \n" + error);
+				alertBuilder.setPositiveButton("OK", null);
+				alertBuilder.show();				
 			} else {
 				mPasswordView
 						.setError(getString(R.string.error_incorrect_password));
@@ -320,7 +333,7 @@ public class LoginActivity extends Activity {
 			utilizador.setMorada(mAddress);
 			utilizador.setUsername(mEmail);
 			utilizador.setPassword(mPassword);
-			LoginActivity.this.rest.criaUtilizador(utilizador);
+			MainActivity.restClient.criaUtilizador(utilizador);
 			return true;
 		}
 

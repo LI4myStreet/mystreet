@@ -19,7 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
-	private RestClient rest;
+	public static RestClient restClient = new RestClient("http://10.0.2.2:2000/api");;
 	private AlertDialog.Builder alertBuilder;
 	private Collection<Ocorrencia> ocorrencias;
 	private String filter;
@@ -48,8 +48,7 @@ public class MainActivity extends Activity {
             	startActivity(i);
             }
         });
-        
-		this.rest = new RestClient("http://10.0.2.2:2000/api");
+        		
 		new RestAsyncTask().execute();
 	}
 
@@ -58,6 +57,15 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	@Override
+	public void onResume() {
+		if(((MyStreeApplication)getApplication()).isLogged()) {
+			String nome = ((MyStreeApplication)getApplication()).getUtilizador().getNome(); 
+			setTitle(getString(R.string.app_name) + " : " + nome);
+		}
+		super.onResume();
 	}
 	
 	void updateOcorrencias() {
@@ -83,7 +91,7 @@ public class MainActivity extends Activity {
 		@Override
 		protected Collection<Ocorrencia> doInBackground(Void... params) {
 			 try {
-				return rest.getOcorrencias();
+				return restClient.getOcorrencias();
 			} catch (JSONException e) {
 				error = e.getLocalizedMessage();
 				e.printStackTrace();
