@@ -1,3 +1,4 @@
 /src/REST/REST/bin
 /src/REST/REST/obj
 /src/REST/*.suo
+/src/REST/REST/REST.csproj.user
