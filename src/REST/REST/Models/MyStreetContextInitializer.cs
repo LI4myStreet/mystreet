@@ -39,6 +39,16 @@ namespace REST.Models
 
             occorrencias.ForEach(o => context.Ocorrencias.Add(o));
             context.SaveChanges();
+
+            var localidades = new List<Localidade>()
+            {
+                new Localidade() { Nome = "Braga", Coordenadas = "0.123, 0.123" },
+                new Localidade() { Nome = "Macieira da Maia", Coordenadas = "0.234, 0.234" },
+                new Localidade() { Nome = "Porto", Coordenadas = "0.345, 0.345" }
+            };
+
+            localidades.ForEach(l => context.Localidades.Add(l));
+            context.SaveChanges();
         }
     }
 }

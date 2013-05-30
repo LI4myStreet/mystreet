@@ -123,6 +123,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntervencaoController.cs" />
+    <Compile Include="Controllers\LocalidadesController.cs" />
     <Compile Include="Controllers\OcorrenciasController.cs" />
     <Compile Include="Controllers\UtilizadoresController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
