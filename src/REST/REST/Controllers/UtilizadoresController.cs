@@ -73,7 +73,7 @@ namespace REST.Controllers
         // POST api/Utilizador
         public HttpResponseMessage PostUtilizador(Utilizador utilizador)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && db.Utilizadores.FirstOrDefault(u => u.Username == utilizador.Username) == null)
             {
                 db.Utilizadores.Add(utilizador);
                 db.SaveChanges();
