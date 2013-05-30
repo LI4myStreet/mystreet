@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace REST.Models
 {
@@ -24,6 +26,10 @@ namespace REST.Models
         [Required, MaxLength(255)]
         public string Coordenadas { get; set; }
 
+        [JsonIgnore, IgnoreDataMember]
         public Utilizador Utilizador { get; set; }
+
+        [JsonIgnore, IgnoreDataMember]
+        public Localidade Localidade { get; set; }
     }
 }

@@ -30,16 +30,6 @@ namespace REST.Models
             intervencoes.ForEach(p => context.Intervencoes.Add(p));
             context.SaveChanges();
 
-            var occorrencias = new List<Ocorrencia>()
-            {
-                new Ocorrencia() { Descricao = "Passeio estragado", Coordenadas = "0.120,0.1234", Estado = "Reportado", Morada = "Rua dos Moinhos, Macieira da Maia", Utilizador = utilizadores[1] },
-                new Ocorrencia() { Descricao = "Lâmpada fundida", Coordenadas = "0.120,0.1234", Estado = "Reportado", Morada = "Av. Liberdade, Braga", Utilizador = utilizadores[2] },
-                new Ocorrencia() { Descricao = "Muro caído", Coordenadas = "0.120,0.1234", Estado = "Em estudo", Morada = "Rua Nova St. Cruz, Braga", Utilizador = utilizadores[3] }                
-            };
-
-            occorrencias.ForEach(o => context.Ocorrencias.Add(o));
-            context.SaveChanges();
-
             var localidades = new List<Localidade>()
             {
                 new Localidade() { Nome = "Braga", Coordenadas = "0.123, 0.123" },
@@ -48,6 +38,16 @@ namespace REST.Models
             };
 
             localidades.ForEach(l => context.Localidades.Add(l));
+            context.SaveChanges();
+
+            var occorrencias = new List<Ocorrencia>()
+            {
+                new Ocorrencia() { Descricao = "Passeio estragado", Coordenadas = "0.120,0.1234", Estado = "Reportado", Morada = "Rua dos Moinhos", Utilizador = utilizadores[1], Localidade = localidades[1] },
+                new Ocorrencia() { Descricao = "Lâmpada fundida", Coordenadas = "0.120,0.1234", Estado = "Reportado", Morada = "Av. Liberdade", Utilizador = utilizadores[2], Localidade = localidades[0] },
+                new Ocorrencia() { Descricao = "Muro caído", Coordenadas = "0.120,0.1234", Estado = "Em estudo", Morada = "Rua Nova St. Cruz", Utilizador = utilizadores[3], Localidade = localidades[0] }                
+            };
+
+            occorrencias.ForEach(o => context.Ocorrencias.Add(o));
             context.SaveChanges();
         }
     }
