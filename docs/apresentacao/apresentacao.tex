@@ -39,7 +39,10 @@ Rui Silva nº 47082\\
 }
 
 \date % [Short Occasion] % (optional)
-{LI4 2012-2013}
+{
+LEI-LI4       \\
+2012-2013
+}
 
 \subject{MyStreet Apresentação}
 % This is only inserted into the PDF information catalog. Can be left
@@ -54,12 +57,12 @@ Rui Silva nº 47082\\
 
 % Delete this, if you do not want the table of contents to pop up at
 % the beginning of each subsection:
-%\AtBeginSubsection[]
-%{
-%  \begin{frame}<beamer>{}
- %   \tableofcontents[currentsection,currentsubsection]
- % \end{frame}
-%}
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
 
 
 % If you wish to uncover everything in a step-wise fashion, uncomment
@@ -91,88 +94,72 @@ Rui Silva nº 47082\\
 
 \section{Introdução}
 
-\subsection{Conceito}
+\subsection{Problema}
 
-\begin{frame}{Em que consiste}%{Subtitles are optional.}
-  % - A title should summarize the slide in an understandable fashion
-  %   for anyone how does not follow everything on the slide itself.
-
+\begin{frame}{Descrição}
   \begin{itemize}
-  \item Troca de informação sobre infraestrturas
-    %Use \texttt{itemize} a lot.
-  \item Relato de problemas
-   % Use very short sentences or short phrases.
-  \item Atualizações do estado dos problemas
-  \item Sugestões de resolução
+  \item Monitorização de infraestruturas numa determinada zona
+  \item Tempo longo na deteção de problemas
+  \item Falta de comunicação com os moradores
+  \item Necessidade de deslocação ao local
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Make Titles Informative.}
+\subsection{Soluções}
 
-  You can create overlays\dots
+\begin{frame}{Soluções Possíveis}
   \begin{itemize}
-  \item using the \texttt{pause} command:
+  \item Nomeação de um representante local
+  \item Atribuição de zonas a equipas de manutenção
     \begin{itemize}
-    \item
-      First item.
-      \pause
-    \item    
-      Second item.
+    \item Circuitos diários
+    \item Recolha de informação junto dos moradores
     \end{itemize}
-  \item
-    using overlay specifications:
-    \begin{itemize}
-    \item<3->
-      First item.
-    \item<4->
-      Second item.
-    \end{itemize}
-  \item
-    using the general \texttt{uncover} command:
-    \begin{itemize}
-      \uncover<5->{\item
-        First item.}
-      \uncover<6->{\item
-        Second item.}
-    \end{itemize}
+  \item \textbf{Criação de uma rede social}
   \end{itemize}
 \end{frame}
 
-
-\subsection{Second Subsection}
-
-\begin{frame}{Make Titles Informative.}
-\end{frame}
-
-\begin{frame}{Make Titles Informative.}
-\end{frame}
-
-
-
-\section*{Summary}
-
-\begin{frame}{Summary}
-
-  % Keep the summary *very short*.
+\begin{frame}{Solução Escolhida}{Criação de uma rede social}
   \begin{itemize}
-  \item
-    The \alert{first main message} of your talk in one or two lines.
-  \item
-    The \alert{second main message} of your talk in one or two lines.
-  \item
-    Perhaps a \alert{third message}, but not more than that.
+  \item Comunicação feita através da internet
+  \item Baseada no modelo de redes sociais conhecidas
+  \item Possibilita o contacto diretor entre moradores e funcionários
+  \item Possibilidade de utilização de dispositivos móveis
+  \end{itemize}
+\end{frame}
+
+\section{Objetivos}
+
+\subsection{Gerais}
+
+\begin{frame}{Gerais}
+\end{frame}
+
+\subsection{Aplicação}
+
+\begin{frame}{Aplicação}
+\end{frame}
+
+
+
+\section*{Conclusões}
+
+\begin{frame}{Conclusões}
+
+  \begin{itemize}
+  \item Conclusão
   \end{itemize}
   
   % The following outlook is optional.
   \vskip0pt plus.5fill
   \begin{itemize}
   \item
-    Outlook
+    Passos seguintes
     \begin{itemize}
     \item
-      Something you haven't solved.
+      Possível interação com \emph{software} existente 
     \item
-      Something else you haven't solved.
+      Internacionalização
     \end{itemize}
   \end{itemize}
 \end{frame}
