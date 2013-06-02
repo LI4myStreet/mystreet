@@ -12,46 +12,46 @@ using REST.Models;
 
 namespace REST.Controllers
 {
-    public class UtilizadoresController : ApiController
+    public class LocalidadesController : ApiController
     {
         private MyStreetContext db = new MyStreetContext();
 
-        // GET api/Utilizador
-        public IEnumerable<Utilizador> GetUtilizadores()
+        // GET api/Localidades
+        public IEnumerable<Localidade> GetLocalidades()
         {
-            return db.Utilizadores.AsEnumerable();
+            return db.Localidades.AsEnumerable();
         }
 
-        // GET api/Utilizador/5
-        public Utilizador GetUtilizador(int id)
+        // GET api/Localidades/5
+        public Localidade GetLocalidade(int id)
         {
-            Utilizador utilizador = db.Utilizadores.Find(id);
-            if (utilizador == null)
+            Localidade localidade = db.Localidades.Find(id);
+            if (localidade == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
-            return utilizador;
+            return localidade;
         }
 
-        // GET api/Utilizador/?username=u&password=p
-        public Utilizador GetUtilizador(string username, string password)
-        {            
-            Utilizador utilizador = db.Utilizadores.FirstOrDefault(u => u.Username == username && u.Password == password);
-            if (utilizador == null)
+        // GET api/Localidades/?nome=somename
+        public Localidade GetLocalidade(string nome)
+        {
+            Localidade localidade = db.Localidades.FirstOrDefault(l => l.Nome == nome);
+            if (localidade == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
-            return utilizador;
+            return localidade;
         }
 
-        // PUT api/Utilizador/5
-        public HttpResponseMessage PutUtilizador(int id, Utilizador utilizador)
+        // PUT api/Localidades/5
+        public HttpResponseMessage PutLocalidade(int id, Localidade localidade)
         {
-            if (ModelState.IsValid && id == utilizador.Id)
+            if (ModelState.IsValid && id == localidade.ID)
             {
-                db.Entry(utilizador).State = EntityState.Modified;
+                db.Entry(localidade).State = EntityState.Modified;
 
                 try
                 {
@@ -70,16 +70,16 @@ namespace REST.Controllers
             }
         }
 
-        // POST api/Utilizador
-        public HttpResponseMessage PostUtilizador(Utilizador utilizador)
+        // POST api/Localidades
+        public HttpResponseMessage PostLocalidade(Localidade localidade)
         {
-            if (ModelState.IsValid && db.Utilizadores.FirstOrDefault(u => u.Username == utilizador.Username) == null)
+            if (ModelState.IsValid)
             {
-                db.Utilizadores.Add(utilizador);
+                db.Localidades.Add(localidade);
                 db.SaveChanges();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, utilizador);
-                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = utilizador.Id }));
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, localidade);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = localidade.ID }));
                 return response;
             }
             else
@@ -88,16 +88,16 @@ namespace REST.Controllers
             }
         }
 
-        // DELETE api/Utilizadores/5
-        public HttpResponseMessage DeleteUtilizador(int id)
+        // DELETE api/Localidades/5
+        public HttpResponseMessage DeleteLocalidade(int id)
         {
-            Utilizador utilizador = db.Utilizadores.Find(id);
-            if (utilizador == null)
+            Localidade localidade = db.Localidades.Find(id);
+            if (localidade == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            db.Utilizadores.Remove(utilizador);
+            db.Localidades.Remove(localidade);
 
             try
             {
@@ -108,7 +108,7 @@ namespace REST.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK, utilizador);
+            return Request.CreateResponse(HttpStatusCode.OK, localidade);
         }
 
         protected override void Dispose(bool disposing)
