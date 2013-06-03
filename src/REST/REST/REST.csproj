@@ -139,7 +139,6 @@
     <Compile Include="Models\MyStreetContextInitializer.cs" />
     <Compile Include="Models\Ocorrencia.cs" />
     <Compile Include="Models\Tag.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Utilizador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
