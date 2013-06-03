@@ -2,36 +2,46 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace REST.Models
 {
     public class Classificacao
-    {
-        public int ID { get; set; }
-        public int UtilID { get; set; }
-        public int InterID { get; set; }
+    {       
+        [Column(Order = 0), Key,ForeignKey("Utilizador")]
+        public int UtilizadorId { get; set; }
+        [Column(Order = 1), Key, ForeignKey("Intervencao")]
+        public int IntervencaoId { get; set; }
+        [Required]
         public int Valor { get; set; }
+
+        [JsonIgnore, IgnoreDataMember]
+        public Utilizador Utilizador { get; set; }
+
+        [JsonIgnore, IgnoreDataMember]
+        public Intervencao Intervencao { get; set; }
 
         public Classificacao()
         {
-            ID = -1;
-            UtilID = -1;
-            InterID = -1;
+            UtilizadorId = -1;
+            IntervencaoId = -1;
             Valor = 0;
         }
 
         public Classificacao(int utilid, int interid, int valor)
         {
-            this.UtilID = utilid;
-            this.InterID = interid;
+            this.UtilizadorId = utilid;
+            this.IntervencaoId = interid;
             this.Valor = valor;
         }
 
         public Classificacao(Classificacao c)
         {
-            this.ID = c.ID;
-            this.UtilID = c.UtilID;
-            this.InterID = c.InterID;
+            this.UtilizadorId = c.UtilizadorId;
+            this.IntervencaoId = c.IntervencaoId;
             this.Valor = c.Valor;
         }
 
@@ -45,7 +55,7 @@ namespace REST.Models
             if (obj == null) return false;
             Classificacao c = obj as Classificacao;
             if ((object)c == null) return false;
-            if (ID == c.ID&&UtilID==c.UtilID&&InterID==c.InterID&&Valor==c.Valor) return true;
+            if (UtilizadorId==c.UtilizadorId&&IntervencaoId==c.IntervencaoId&&Valor==c.Valor) return true;
             return false;
         }
 

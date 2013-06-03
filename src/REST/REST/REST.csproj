@@ -122,22 +122,35 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AmigosController.cs" />
+    <Compile Include="Controllers\ClassificacoesController.cs" />
+    <Compile Include="Controllers\ComentariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IntervencaoController.cs" />
+    <Compile Include="Controllers\ImagensController.cs" />
+    <Compile Include="Controllers\ImagensOcorrenciasController.cs" />
+    <Compile Include="Controllers\IntervencoesController.cs" />
+    <Compile Include="Controllers\LikesController.cs" />
     <Compile Include="Controllers\LocalidadesController.cs" />
     <Compile Include="Controllers\OcorrenciasController.cs" />
+    <Compile Include="Controllers\OcorrenciasTagsController.cs" />
+    <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\UtilizadoresController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Amigo.cs" />
     <Compile Include="Models\Classificacao.cs" />
     <Compile Include="Models\Comentario.cs" />
+    <Compile Include="Models\Imagem.cs" />
+    <Compile Include="Models\ImagemOcorencia.cs" />
     <Compile Include="Models\Intervencao.cs" />
+    <Compile Include="Models\Like.cs" />
     <Compile Include="Models\Localidade.cs" />
     <Compile Include="Models\MyStreetContext.cs" />
     <Compile Include="Models\MyStreetContextInitializer.cs" />
     <Compile Include="Models\Ocorrencia.cs" />
+    <Compile Include="Models\OcorrenciaTags.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Utilizador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 
 namespace REST.Models
@@ -11,34 +13,40 @@ namespace REST.Models
     public class Intervencao
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
-        [Required]
-        public int UtilID { get; set; }
-        [Required]
-        public int OID { get; set; }
+        public int Id { get; set; }
+        [Required, ForeignKey("Utilizador")]
+        public int UtilizadorId { get; set; }
+        [Required, ForeignKey("Ocorrencia")]
+        public int OcorrenciaId { get; set; }
         [Required, MaxLength(255)]
         public string Descricao { get; set; }
 
+        [JsonIgnore, IgnoreDataMember]
+        public Utilizador Utilizador { get; set; }
+
+        [JsonIgnore, IgnoreDataMember]
+        public Ocorrencia Ocorrencia { get; set; }
+
         public Intervencao()
         {
-            ID = -1;
-            UtilID = -1;
-            OID = -1;
+            Id = -1;
+            UtilizadorId = -1;
+            OcorrenciaId = -1;
             Descricao = "";
         }
 
         public Intervencao(int utilid, int oid, string descricao)
         {
-            this.UtilID = utilid;
-            this.OID = oid;
+            this.UtilizadorId = utilid;
+            this.OcorrenciaId = oid;
             this.Descricao = descricao;
         }
 
         public Intervencao(Intervencao i)
         {
-            this.ID = i.ID;
-            this.UtilID = i.UtilID;
-            this.OID = i.OID;
+            this.Id = i.Id;
+            this.UtilizadorId = i.UtilizadorId;
+            this.OcorrenciaId = i.OcorrenciaId;
             this.Descricao = i.Descricao;
         }
 
@@ -52,7 +60,7 @@ namespace REST.Models
             if (obj == null) return false;
             Intervencao i = obj as Intervencao;
             if ((object)i == null) return false;
-            if (ID==i.ID&&UtilID==i.UtilID&&OID==i.OID&&Descricao.Equals(i.Descricao)) return true;
+            if (Id==i.Id&&UtilizadorId==i.UtilizadorId&&OcorrenciaId==i.OcorrenciaId&&Descricao.Equals(i.Descricao)) return true;
             return false;
         }
 

@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace REST.Models
 {
     public class Tag
     {
-        public int ID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        [Required, MaxLength(255)]
         public string Descricao { get; set; }
 
         public Tag()
         {
-            ID = -1;
+            Id = -1;
             Descricao = "";
         }
 
@@ -23,7 +27,7 @@ namespace REST.Models
 
         public Tag(Tag t)
         {
-            this.ID = t.ID;
+            this.Id = t.Id;
             this.Descricao = t.Descricao;
         }
 
@@ -37,7 +41,7 @@ namespace REST.Models
             if (obj == null) return false;
             Tag t = obj as Tag;
             if ((object)t == null) return false;
-            if (ID==t.ID&&Descricao.Equals(t.Descricao)) return true;
+            if (Id==t.Id&&Descricao.Equals(t.Descricao)) return true;
             return false;
         }
 

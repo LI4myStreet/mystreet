@@ -17,9 +17,29 @@ namespace REST.Models
         {
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Amigo>().HasRequired(a => a.Utilizador2).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Like>().HasRequired(l => l.Ocorrencia).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Intervencao>().HasRequired(i => i.Ocorrencia).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Classificacao>().HasRequired(c => c.Intervencao).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Comentario>().HasRequired(c => c.Ocorrencia).WithMany().WillCascadeOnDelete(false);
+            base.OnModelCreating(modelBuilder);
+        } 
+
         public DbSet<Utilizador> Utilizadores { get; set; }
         public DbSet<Intervencao> Intervencoes { get; set; }
         public DbSet<Ocorrencia> Ocorrencias { get; set; }
         public DbSet<Localidade> Localidades { get; set; }
+        public DbSet<Amigo> Amigos { get; set; }
+        public DbSet<Like> Likes { get; set; }
+        public DbSet<Classificacao> Classificacoes { get; set; }
+        public DbSet<Imagem> Imagens { get; set; }
+        public DbSet<Comentario> Comentarios { get; set; }
+        public DbSet<ImagemOcorrencia> ImagensOcorrencias { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<OcorrenciaTags> OcorrenciasTags { get; set; }
+
+        
     }
 }
