@@ -13,13 +13,22 @@ namespace myStreet {
     public partial class SiteMaster {
         
         /// <summary>
-        /// HeadContent control.
+        /// TitleContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder TitleContent;
+        
+        /// <summary>
+        /// HeadContentBootstrap control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContentBootstrap;
         
         /// <summary>
         /// HeadLoginView control.

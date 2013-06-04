@@ -34,7 +34,7 @@ namespace myStreet.Account
                 username = LoginUser.UserName;
                 pass = LoginUser.Password;
 
-                string endPoint = @"https://localhost:44300/api/utilizador/";
+                string endPoint = @"https://localhost:44300/api/utilizadores/";
                 var client = new RestClient(endPoint);
                 string json = client.MakeRequest("?username=" + username + "&password=" + pass);
                 json = json.Replace("REST.Models", "myStreet.Models");

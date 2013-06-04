@@ -1,8 +1,14 @@
 ﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeBehind="Login.aspx.cs" Inherits="myStreet.Account.Login" %>
 
-<asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
-</asp:Content>
+     <asp:Content ID="btsrtp" ContentPlaceHolderID="HeadContentBootstrap" runat="server">
+        <%--<link href="Styles/Site.css" rel="stylesheet" type="text/css" />--%>
+<%--        <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" type="text/css" />
+        <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+        <script src="/Scripts/jquery-1.4.1.js" type="text/javascript" />
+        <script src="/bootstrap/js/bootstrap.js" type="text/javascript" />--%>
+    </asp:Content>
+
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <h2>
         Log In

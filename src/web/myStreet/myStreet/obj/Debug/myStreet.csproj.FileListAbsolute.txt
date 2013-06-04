@@ -9,4 +9,3 @@ C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\bin\GeoAPI.dll
 C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\bin\Newtonsoft.Json.xml
 C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\obj\Debug\myStreet.dll
 C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\obj\Debug\myStreet.pdb
-C:\Users\Miguel\Desktop\li4\mystreet\src\web\myStreet\myStreet\obj\Debug\myStreet.csprojResolveAssemblyReference.cache

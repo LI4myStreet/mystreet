@@ -21,5 +21,10 @@ namespace myStreet
                     (this.GetType(), "myStreetMapScript", script, true);
             }
         }
+
+        protected void getCoordinates()
+        {
+
+        }
     }
 }

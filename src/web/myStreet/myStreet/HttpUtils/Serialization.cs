@@ -41,7 +41,16 @@ namespace myStreet.HttpUtils
             return stream;
         }
 
-              
-
+        public static string Serialize(object obj)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            using (StreamReader reader = new StreamReader(memoryStream))
+            {
+                DataContractSerializer serializer = new DataContractSerializer(obj.GetType());
+                serializer.WriteObject(memoryStream, obj);
+                memoryStream.Position = 0;
+                return reader.ReadToEnd();
+            }
+        }
     }
 }
