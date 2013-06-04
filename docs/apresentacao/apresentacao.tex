@@ -128,26 +128,134 @@ LEI-LI4       \\
   \end{itemize}
 \end{frame}
 
-\section{Objetivos}
-
-\subsection{Gerais}
+\subsection{Objetivos}
 
 \begin{frame}{Gerais}
+ \begin{itemize}
+ \item Facilitar a comunicação entre comunidades locais e responsáveis técnicos
+ \item Fomentar a troca de ideias entre moradores
+ \item Simplificar a monitorização de infraestrtuturas
+ \end{itemize}
 \end{frame}
-
-\subsection{Aplicação}
 
 \begin{frame}{Aplicação}
+ \begin{itemize}
+ \item Simples e fácil de usar
+ \item Estar disponível 24h/dia
+ \item Utilizar tecnologia de ponta
+ \item Suporte para várias plataformas
+ \item Fácil integração com outros serviços 
+ \end{itemize}
 \end{frame}
 
+\section{Requisitos}
 
+\subsection{Atores}
+
+\begin{frame}{Atores}
+ \begin{itemize}
+ \item Moradores
+ \item Funcionários
+ \item Administradores
+ \end{itemize}
+\end{frame}
+
+\subsection{Funcionalidades}
+
+\begin{frame}{Moradores}
+ \begin{itemize}
+ \item Reportar ocorrência
+ \item Classificar intervenção
+ \end{itemize}
+\end{frame}
+
+\begin{frame}{Funcionários}
+ \begin{itemize}
+ \item Atualizar ocorrência
+ \item Fechar ocorrência
+ \end{itemize}
+\end{frame}
+
+\begin{frame}{Moradores e Funcionários}
+ \begin{itemize}
+ \item Adicionar comentários	
+ \item Criar e editar perfil
+ \item Autenticar-se
+ \item Consultar ocorrências
+ \item Consultar estatísticas
+ \end{itemize}
+\end{frame}
+
+\begin{frame}{Administradores}
+ \begin{itemize}
+ \item Definir funcionários
+ \item Eliminar ou bloquear utilizadores
+ \end{itemize}
+\end{frame}
+
+\section{Desenvolvimento}
+
+\subsection{Arquitetura}
+
+\begin{frame}{Componentes}
+ \begin{itemize}
+ \item Base de dados
+ \item Web service
+ \item Aplicação Web
+ \item Aplicação Mobile 
+ \end{itemize}
+\end{frame}
+
+\subsection{Componentes}
+
+\begin{frame}{Base de dados}
+ \begin{itemize}
+ \item MS SQL Server 2012
+ \item Persistência de toda a informação do sistema
+ \item ...
+ \end{itemize}
+\end{frame}
+
+\begin{frame}{Web service}
+ \begin{itemize}
+ \item Interface com a base de dados utilizando a Entity Framework
+ \item Lógica de negócio
+ \item REST (Representational State Transfer)
+ \item Utilização de https
+ \item .NET Framework - Web Api 
+ \end{itemize}
+\end{frame}
+
+\begin{frame}{Aplicação Web}
+ \begin{itemize}
+ \item Principal interface com o utilizador
+ \item Implementação de todas as funcionalidades do sistema
+ \item Utilização de AJAX
+ \item ASP.NET 
+ \end{itemize}
+\end{frame}
+
+\begin{frame}{Aplicação Mobile}
+ \begin{itemize}
+ \item Android
+ \item Implementação de um subconjunto alargado das funcionalidades do sistema
+ \item Utilização de JSON
+ \item Android
+ \item Aplicação nativa
+ \item Interação com GPS
+ \item Interação com o dispositivo de captura de imagem
+ \end{itemize}
+\end{frame}
 
 \section*{Conclusões}
 
 \begin{frame}{Conclusões}
 
   \begin{itemize}
-  \item Conclusão
+  \item Metodologias de trabalho são fundamentais
+  %\item A organização do grupo de trabalho é uma peça central no sucesso do mesmo
+  \item As tecnologias emergentes podem ter um papel fundamental na velociade e facilidade do desenvolvimento
+  \item Um bom processo de desenvolvimento pode ter resultados interessantes até num curto espaço de tempo 
   \end{itemize}
   
   % The following outlook is optional.
@@ -156,10 +264,8 @@ LEI-LI4       \\
   \item
     Passos seguintes
     \begin{itemize}
-    \item
-      Possível interação com \emph{software} existente 
-    \item
-      Internacionalização
+    \item Possível interação com \emph{software} existente 
+    \item Internacionalização
     \end{itemize}
   \end{itemize}
 \end{frame}
