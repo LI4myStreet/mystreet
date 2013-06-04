@@ -10,5 +10,7 @@
     <string name="address">Address</string>
     <string name="username">Username</string>
     <string name="register">Register</string>
+    <string name="nova_ocorrencia">Nova Ocorrência</string>
+    <string name="title_activity_nova_ocorrencia">Nova Ocorrência</string>
 
 </resources>

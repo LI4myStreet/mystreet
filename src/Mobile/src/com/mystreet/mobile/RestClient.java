@@ -83,6 +83,25 @@ public class RestClient {
 		return ret;
 	}
 	
+	public Collection<Localidade> getLocalidades() throws JSONException {
+		String response = get("/localidades/");
+		if(response == null) return new ArrayList<Localidade>();
+		
+		JSONArray jsonLocalidades = new JSONArray(response);		
+		ArrayList<Localidade> ret = new ArrayList<Localidade>();
+		for (int i=0; i < jsonLocalidades.length(); i++)
+		{
+		    JSONObject o = jsonLocalidades.getJSONObject(i);
+		    // Pulling items from the array
+		    Localidade localidade = new Localidade();
+		    localidade.setNome(o.getString("Nome"));
+		    
+		    ret.add(localidade);
+		}
+		
+		return ret;
+	}
+	
 	private String get(String request) {
 		HttpGet httpGet = new HttpGet(this.url+request);
 		
