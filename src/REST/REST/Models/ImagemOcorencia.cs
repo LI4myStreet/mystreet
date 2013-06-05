@@ -11,9 +11,9 @@ namespace REST.Models
 {
     public class ImagemOcorrencia
     {
-        [Column(Order = 0), Required, Key, ForeignKey("Ocorrencia")]
+        [Column(Order = 0), Key, ForeignKey("Ocorrencia")]
         public int OcorrenciaId { get; set; }
-        [Column(Order = 1), Required, Key, ForeignKey("Imagem")]
+        [Column(Order = 1), Key, ForeignKey("Imagem")]
         public int ImagemId { get; set; }
 
         [JsonIgnore, IgnoreDataMember]
