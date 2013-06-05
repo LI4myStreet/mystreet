@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Base64;
 import android.util.Log;
 
 public class RestClient {
@@ -62,7 +63,7 @@ public class RestClient {
 		}
 	}
 	
-	public boolean criaOcorrencia(Ocorrencia ocorrencia) {
+	public int criaOcorrencia(Ocorrencia ocorrencia) {
 		JSONObject jsonOcorrencia = new JSONObject();
 		try {
 			jsonOcorrencia.put("Descricao", ocorrencia.getDescricao());
@@ -71,12 +72,55 @@ public class RestClient {
 			jsonOcorrencia.put("LocalidadeID", ocorrencia.getLocalidadeID());
 			jsonOcorrencia.put("UtilizadorID", ocorrencia.getUtilizadorID());
 			
-			post("/ocorrencias/", jsonOcorrencia);
+			String result = post("/ocorrencias/", jsonOcorrencia);
+			JSONObject jsonResult = new JSONObject(result);
+			Log.d("Post ocorrencias", "clean");
+			return jsonResult.getInt("Id");
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
+	public int criaImagem(byte[] imagem) {
+		JSONObject jsonImagem = new JSONObject();
+		try {
+			jsonImagem.put("Bytes", Base64.encodeToString(imagem, Base64.DEFAULT));
+			
+			String result = post("/imagens/", jsonImagem);
+			JSONObject jsonResult = new JSONObject(result);
+			Log.d("Post imagens", "clean");
+			return jsonResult.getInt("Id");
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
+	public boolean criaImagemOcorrencia(int imagemId, int ocorrenciaId) {
+		JSONObject jsonImagemOcorrencia = new JSONObject();
+		try {
+			jsonImagemOcorrencia.put("ImagemId", imagemId);
+			jsonImagemOcorrencia.put("OcorrenciaId", ocorrenciaId);
+			
+			post("/imagensocorrencias/", jsonImagemOcorrencia);
 			Log.d("Post ocorrencias", "clean");
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
+	}
+	
+	public void getImagens() {
+		String response = get("/imagens/");
+		if(response == null) return;
+		
+		JSONArray jsonImagens;
+		try {
+			jsonImagens = new JSONArray(response);
+			Log.d("GetImagens out", jsonImagens.toString());
+		} catch (JSONException e) {
+			Log.e("GetImages error", e.getLocalizedMessage());
+		}
+		
 	}
 	
 	public Collection<Ocorrencia> getOcorrencias() throws JSONException {
@@ -154,7 +198,7 @@ public class RestClient {
 		return null;
 	}
 	
-	private void post(String request, JSONObject object) throws PostException {
+	private String post(String request, JSONObject object) throws PostException {
 		HttpPost httpPost = new HttpPost(this.url+request);
 		
 		Log.d("Post object", object.toString());
@@ -167,22 +211,22 @@ public class RestClient {
 		  StatusLine statusLine = response.getStatusLine();
 		  int statusCode = statusLine.getStatusCode();
 		  
-		  if (statusCode != 201) {
-			  HttpEntity entity = response.getEntity();
-			  InputStream content = entity.getContent();
-			  BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-		    
-			  String line;
-			  StringBuilder result = new StringBuilder();
-			  while ((line = reader.readLine()) != null) {
-				  result.append(line);
-			  }	        
-			  
-			  Log.e("Post status", Integer.toString(statusCode));
-			  Log.e(RestClient.class.getName(), result.toString());
-			  
-			  throw new PostException();
-		  }
+		  HttpEntity entity = response.getEntity();
+		  InputStream content = entity.getContent();
+		  BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+	    
+		  String line;
+		  StringBuilder result = new StringBuilder();
+		  while ((line = reader.readLine()) != null) {
+			  result.append(line);
+		  }	        
+		 
+		  Log.d("Post status", Integer.toString(statusCode));
+		  Log.d(RestClient.class.getName(), result.toString());
+		  
+		  if (statusCode != 201) throw new PostException();
+		  
+		  return result.toString();
 		} catch (ClientProtocolException e) {
 			Log.e(RestClient.class.getName(), e.getLocalizedMessage());
 			throw new PostException();

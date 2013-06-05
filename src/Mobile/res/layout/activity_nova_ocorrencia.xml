@@ -95,6 +95,35 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/localidade" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/ivPreview"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:contentDescription="@string/imagem"
+                    android:src="@drawable/ic_stat_image" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="right" >
+
+                    <ImageButton
+                        android:id="@+id/ibAddImagem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:contentDescription="@string/adicionar_imagem"
+                        android:src="@drawable/ic_stat_plus" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/btnAdicionar"
                 android:layout_width="wrap_content"

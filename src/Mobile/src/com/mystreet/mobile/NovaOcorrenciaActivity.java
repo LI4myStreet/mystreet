@@ -1,5 +1,6 @@
 package com.mystreet.mobile;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,6 +16,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,6 +24,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -30,6 +33,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -38,10 +42,13 @@ import android.widget.TextView;
  * well.
  */
 public class NovaOcorrenciaActivity extends Activity {
+	private static final int CAMERA_REQUEST = 1888;
+	
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
 	 */
 	private UserLoginTask mAuthTask = null;
+	private ImageLinkAsyncTask mImageLinkTask = null;
 
 	// Values for email and password at the time of the login attempt.
 	private String mDescricao;
@@ -49,6 +56,9 @@ public class NovaOcorrenciaActivity extends Activity {
 	private int mLocalidadeID;
 	private String mCoordenadas;
 	private Collection<Localidade> mLocalidades;
+	private byte[] mImage;
+	private int mImageId;
+	private int mOcorrenciaId;
 	
 	// UI references.
 	private EditText mDescricaoView;
@@ -124,7 +134,29 @@ public class NovaOcorrenciaActivity extends Activity {
 				        }
 					}
 				});
+		
+		findViewById(R.id.ibAddImagem).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+					    startActivityForResult(takePictureIntent, CAMERA_REQUEST);
+					}
+				});
+		
+		mImageId = -1;
 	}
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {  
+            Bitmap photo = (Bitmap) data.getExtras().get("data"); 
+            ImageView imageView = (ImageView)findViewById(R.id.ivPreview);
+            imageView.setImageBitmap(photo);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            photo.compress(Bitmap.CompressFormat.JPEG, 60, stream);
+            mImage = stream.toByteArray();
+        }  
+    } 
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -221,6 +253,11 @@ public class NovaOcorrenciaActivity extends Activity {
 		}
 	}
 
+	public void createImageLink() {
+		showProgress(true);
+		mImageLinkTask = new ImageLinkAsyncTask();
+		mImageLinkTask.execute();
+	}
 	/**
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
@@ -236,12 +273,52 @@ public class NovaOcorrenciaActivity extends Activity {
 			ocorrencia.setLocalidadeID(mLocalidadeID);
 			ocorrencia.setMorada(mMorada);
 			ocorrencia.setUtilizadorID(MyStreeApplication.getUtilizador().getId());
-			return MainActivity.restClient.criaOcorrencia(ocorrencia);
+			mOcorrenciaId = MainActivity.restClient.criaOcorrencia(ocorrencia);
+			if(mOcorrenciaId > 0) {
+				if(mImage != null) mImageId = MainActivity.restClient.criaImagem(mImage);
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 		@Override
 		protected void onPostExecute(final Boolean success) {
 			mAuthTask = null;
+			showProgress(false);
+
+			if (success) {
+				if(mImage != null) createImageLink();
+				else finish();
+			} else if(error != null) {
+				alertBuilder.setMessage("Erro ao criar ocorrência: \n" + error);
+				alertBuilder.setPositiveButton("OK", null);
+				alertBuilder.show();
+			} else {
+				alertBuilder.setMessage("Erro desconhecido ao criar ocorrência");
+				alertBuilder.setPositiveButton("OK", null);
+				alertBuilder.show();
+			}
+		}
+
+		@Override
+		protected void onCancelled() {
+			mAuthTask = null;
+			showProgress(false);
+		}
+	}
+	
+	public class ImageLinkAsyncTask extends AsyncTask<Void, Void, Boolean> {
+		private String error = null;
+		
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			return MainActivity.restClient.criaImagemOcorrencia(mImageId, mOcorrenciaId);
+		}
+
+		@Override
+		protected void onPostExecute(final Boolean success) {
+			mImageLinkTask = null;
 			showProgress(false);
 
 			if (success) {
@@ -259,7 +336,7 @@ public class NovaOcorrenciaActivity extends Activity {
 
 		@Override
 		protected void onCancelled() {
-			mAuthTask = null;
+			mImageLinkTask = null;
 			showProgress(false);
 		}
 	}

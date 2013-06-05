@@ -19,5 +19,7 @@
     <string name="localidade">Localidade</string>
     <string name="coordenadas">Coordenadas</string>
     <string name="coordenadas_gps">Obter coordenadas do GPS</string>
+    <string name="imagem">Imagem</string>
+    <string name="adicionar_imagem">Adicionar Imagem</string>
 
 </resources>
