@@ -343,7 +343,7 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
-				finish();
+				attemptLogin();
 			} else {
 				// TODO: create an error placeholder and set message ther
 				Log.e(UserRegisterTask.class.getName(), "Error registering user.");
