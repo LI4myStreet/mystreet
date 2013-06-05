@@ -71,7 +71,7 @@
                 android:paddingRight="32dp"
                 android:text="@string/action_sign_in_short" />
 
-            <EditText
+           <EditText
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,7 +79,6 @@
                 android:hint="@string/name"
                 android:inputType="textPersonName" >
 
-                <requestFocus />
             </EditText>
 
             <EditText

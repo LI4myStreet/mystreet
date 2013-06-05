@@ -14,6 +14,10 @@ public class MyStreeApplication extends Application {
 		return this.utilizador != null;
 	}
 	
+	public void logout() {
+		this.utilizador = null;
+	}
+	
 	public Utilizador getUtilizador() {
 		return this.utilizador;
 	}

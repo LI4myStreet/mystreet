@@ -6,8 +6,12 @@ import java.util.List;
 
 import org.json.JSONException;
 
-import com.mystreet.mobile.MainActivity.RestAsyncTask;
-
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Service;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -15,18 +19,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Service;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 public class NovaOcorrenciaActivity extends Activity {
 	private Spinner spinner;

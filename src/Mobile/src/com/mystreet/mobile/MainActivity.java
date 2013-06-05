@@ -80,7 +80,12 @@ public class MainActivity extends Activity {
 	        case R.id.action_nova_ocorrencia:
 	        	Intent i = new Intent(getApplicationContext(), NovaOcorrenciaActivity.class);
             	startActivity(i);
+            	
 	            return true;
+	        case R.id.action_logout:
+	        	((MyStreeApplication)getApplication()).logout();
+	        	finish();
+	        	startActivity(getIntent());
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
@@ -91,6 +96,8 @@ public class MainActivity extends Activity {
 		if(((MyStreeApplication)getApplication()).isLogged()) {
 			String nome = ((MyStreeApplication)getApplication()).getUtilizador().getNome(); 
 			setTitle(getString(R.string.app_name) + " : " + nome);
+			final ImageButton btnLogin = (ImageButton) findViewById(R.id.imgBtnLogin);
+			btnLogin.setVisibility(View.GONE);
 		}
 		super.onResume();
 	}
