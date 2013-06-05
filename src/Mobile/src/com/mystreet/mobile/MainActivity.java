@@ -83,12 +83,16 @@ public class MainActivity extends Activity {
             	
 	            return true;
 	        case R.id.action_logout:
-	        	MyStreeApplication.logout();
-	        	finish();
-	        	startActivity(getIntent());
+	        	logout();
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
+	}
+	
+	private void logout() {
+		MyStreeApplication.logout();
+    	finish();
+    	startActivity(getIntent());
 	}
 	
 	@Override
@@ -98,7 +102,20 @@ public class MainActivity extends Activity {
 			String nome = MyStreeApplication.getUtilizador().getNome(); 
 			setTitle(getString(R.string.app_name) + " : " + nome);
 			final ImageButton btnLogin = (ImageButton) findViewById(R.id.imgBtnLogin);
-			btnLogin.setVisibility(View.GONE);
+			btnLogin.setImageDrawable(getResources().getDrawable(R.drawable.ic_stat_logout));
+			btnLogin.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View v) {
+	            	logout();
+	            }
+	        });
+		} else {
+			final ImageButton btnLogin = (ImageButton) findViewById(R.id.imgBtnLogin);
+			btnLogin.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View v) {
+	            	Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+	            	startActivity(i);
+	            }
+	        });
 		}
 		super.onResume();
 	}
