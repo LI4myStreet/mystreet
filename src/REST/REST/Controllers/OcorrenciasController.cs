@@ -7,9 +7,11 @@ using System.Web.Http;
 using REST.Models;
 using System.Data;
 using System.Data.Entity.Infrastructure;
+using REST.App_Start;
 
 namespace REST.Controllers
 {
+    [AllowCrossSiteJson]
     public class OcorrenciasController : ApiController
     {
         private MyStreetContext db = new MyStreetContext();
