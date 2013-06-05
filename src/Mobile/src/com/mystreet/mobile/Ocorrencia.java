@@ -1,12 +1,13 @@
 package com.mystreet.mobile;
 
 public class Ocorrencia {
-    public int id;
-    public int utilizadorID;
-    public String descricao;
-    public String estado;
-    public String morada;
-    public String coordenadas;
+    private int id;
+    private int utilizadorID;
+    private int localidadeID;
+    private String descricao;
+    private String estado;
+    private String morada;
+    private String coordenadas;
 	
     public int getId() {
 		return id;
@@ -24,6 +25,14 @@ public class Ocorrencia {
 		this.utilizadorID = utilizadorID;
 	}
 	
+	public int getLocalidadeID() {
+		return localidadeID;
+	}
+
+	public void setLocalidadeID(int localidadeID) {
+		this.localidadeID = localidadeID;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}

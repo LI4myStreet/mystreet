@@ -11,7 +11,13 @@
     <string name="username">Username</string>
     <string name="register">Register</string>
     <string name="nova_ocorrencia">Nova Ocorrência</string>
-    <string name="title_activity_nova_ocorrencia">Nova Ocorrência</string>
     <string name="logout">Logout</string>
+    <string name="descricao">Descrição</string>
+    <string name="morada">Morada</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="a_enviar">A enviar</string>
+    <string name="localidade">Localidade</string>
+    <string name="coordenadas">Coordenadas</string>
+    <string name="coordenadas_gps">Obter coordenadas do GPS</string>
 
 </resources>
