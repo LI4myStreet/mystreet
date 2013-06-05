@@ -6,7 +6,7 @@ public class Utilizador {
 	public String morada;
 	public String username;
 	public String password;
-	public String tipo;
+	public int tipo;
 	
 	public int getId() {
 		return Id;
@@ -38,10 +38,10 @@ public class Utilizador {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getTipo() {
+	public int getTipo() {
 		return tipo;
 	}
-	public void setTipo(String tipo) {
+	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}	
 }

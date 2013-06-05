@@ -3,27 +3,22 @@ package com.mystreet.mobile;
 import android.app.Application;
 
 public class MyStreeApplication extends Application {
-	private Utilizador utilizador;
+	private static Utilizador utilizador = null;
 
-	@Override
-	public void onCreate() {
-		this.utilizador = null;
+	public static boolean isLogged() {
+		return utilizador != null;
 	}
 	
-	public boolean isLogged() {
-		return this.utilizador != null;
+	public static void logout() {
+		utilizador = null;
 	}
 	
-	public void logout() {
-		this.utilizador = null;
-	}
-	
-	public Utilizador getUtilizador() {
-		return this.utilizador;
+	public static Utilizador getUtilizador() {
+		return utilizador;
 	}
 
-	public void setUtilizador(Utilizador utilizador) {
-		this.utilizador = utilizador;
+	public static void setUtilizador(Utilizador utilizador) {
+		MyStreeApplication.utilizador = utilizador;
 	}
 	
 }

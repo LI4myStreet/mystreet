@@ -6,22 +6,21 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.util.Log;
 
 public class RestClient {
 	private String url;
@@ -48,15 +47,36 @@ public class RestClient {
 		return utilizador;
 	}
 	
-	public void criaUtilizador(Utilizador utilizador) {
-		ArrayList<NameValuePair> data = new ArrayList<NameValuePair>();
-		data.add(new BasicNameValuePair("Nome", utilizador.getNome()));
-		data.add(new BasicNameValuePair("Morada", utilizador.getMorada()));
-		data.add(new BasicNameValuePair("Username", utilizador.getUsername()));
-		data.add(new BasicNameValuePair("Password", utilizador.getPassword()));
-		data.add(new BasicNameValuePair("Tipo", ""));
-		
-		post("/utilizadores/", data);
+	public boolean criaUtilizador(Utilizador utilizador) {
+		JSONObject jsonUtilizador = new JSONObject();
+		try {
+			jsonUtilizador.put("Nome", utilizador.getNome());		
+			jsonUtilizador.put("Morada", utilizador.getMorada());
+			jsonUtilizador.put("Username", utilizador.getUsername());
+			jsonUtilizador.put("Password", utilizador.getPassword());
+			
+			post("/utilizadores/", jsonUtilizador);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public boolean criaOcorrencia(Ocorrencia ocorrencia) {
+		JSONObject jsonOcorrencia = new JSONObject();
+		try {
+			jsonOcorrencia.put("Descricao", ocorrencia.getDescricao());
+			jsonOcorrencia.put("Morada", ocorrencia.getMorada());
+			jsonOcorrencia.put("Coordenadas", ocorrencia.getCoordenadas());
+			jsonOcorrencia.put("LocalidadeID", ocorrencia.getLocalidadeID());
+			jsonOcorrencia.put("UtilizadorID", ocorrencia.getUtilizadorID());
+			
+			post("/ocorrencias/", jsonOcorrencia);
+			Log.d("Post ocorrencias", "clean");
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 	
 	public Collection<Ocorrencia> getOcorrencias() throws JSONException {
@@ -72,6 +92,7 @@ public class RestClient {
 		    Ocorrencia ocorrencia = new Ocorrencia();
 		    ocorrencia.setId(o.getInt("Id"));
 		    ocorrencia.setUtilizadorID(o.getInt("UtilizadorID"));
+		    ocorrencia.setUtilizadorID(o.getInt("LocalidadeID"));
 		    ocorrencia.setDescricao(o.getString("Descricao"));
 		    ocorrencia.setEstado(o.getString("Estado"));
 		    ocorrencia.setMorada(o.getString("Morada"));
@@ -92,8 +113,8 @@ public class RestClient {
 		for (int i=0; i < jsonLocalidades.length(); i++)
 		{
 		    JSONObject o = jsonLocalidades.getJSONObject(i);
-		    // Pulling items from the array
 		    Localidade localidade = new Localidade();
+		    localidade.setId(o.getInt("ID"));
 		    localidade.setNome(o.getString("Nome"));
 		    
 		    ret.add(localidade);
@@ -133,17 +154,20 @@ public class RestClient {
 		return null;
 	}
 	
-	private String post(String request, List<NameValuePair> data) {
+	private void post(String request, JSONObject object) throws PostException {
 		HttpPost httpPost = new HttpPost(this.url+request);
 		
+		Log.d("Post object", object.toString());
+		
 		try {
-		  httpPost.setEntity(new UrlEncodedFormEntity(data));
+		  httpPost.setEntity(new StringEntity(object.toString(), "UTF8"));
+		  httpPost.setHeader("Content-type", "application/json");
 		  HttpResponse response = this.client.execute(httpPost);
 		  
 		  StatusLine statusLine = response.getStatusLine();
 		  int statusCode = statusLine.getStatusCode();
 		  
-		  if (statusCode == 200) {
+		  if (statusCode != 201) {
 			  HttpEntity entity = response.getEntity();
 			  InputStream content = entity.getContent();
 			  BufferedReader reader = new BufferedReader(new InputStreamReader(content));
@@ -154,14 +178,26 @@ public class RestClient {
 				  result.append(line);
 			  }	        
 			  
-			  return result.toString();		     
+			  Log.e("Post status", Integer.toString(statusCode));
+			  Log.e(RestClient.class.getName(), result.toString());
+			  
+			  throw new PostException();
 		  }
 		} catch (ClientProtocolException e) {
-			e.printStackTrace();
+			Log.e(RestClient.class.getName(), e.getLocalizedMessage());
+			throw new PostException();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(RestClient.class.getName(), e.getLocalizedMessage());
+			throw new PostException();
 		}
+	}
 	
-		return null;
+	class PostException extends Exception {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+	
 	}
 }

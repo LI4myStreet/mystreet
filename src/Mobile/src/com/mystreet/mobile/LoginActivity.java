@@ -299,7 +299,7 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 
 			if (utilizador != null) {
-				((MyStreeApplication)getApplication()).setUtilizador(utilizador);
+				MyStreeApplication.setUtilizador(utilizador);
 				finish();
 			} else if(error != null) {
 				alertBuilder.setMessage("Erro ao receber o utilizador: \n" + error);

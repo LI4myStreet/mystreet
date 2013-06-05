@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.clear(); 
-		if(((MyStreeApplication)getApplication()).isLogged()) {
+		if(MyStreeApplication.isLogged()) {
 			getMenuInflater().inflate(R.menu.main_logged, menu);
 		} else {
 			getMenuInflater().inflate(R.menu.main, menu);
@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
             	
 	            return true;
 	        case R.id.action_logout:
-	        	((MyStreeApplication)getApplication()).logout();
+	        	MyStreeApplication.logout();
 	        	finish();
 	        	startActivity(getIntent());
 	        default:
@@ -93,8 +93,9 @@ public class MainActivity extends Activity {
 	
 	@Override
 	public void onResume() {
-		if(((MyStreeApplication)getApplication()).isLogged()) {
-			String nome = ((MyStreeApplication)getApplication()).getUtilizador().getNome(); 
+		new RestAsyncTask().execute();
+		if(MyStreeApplication.isLogged()) {
+			String nome = MyStreeApplication.getUtilizador().getNome(); 
 			setTitle(getString(R.string.app_name) + " : " + nome);
 			final ImageButton btnLogin = (ImageButton) findViewById(R.id.imgBtnLogin);
 			btnLogin.setVisibility(View.GONE);
