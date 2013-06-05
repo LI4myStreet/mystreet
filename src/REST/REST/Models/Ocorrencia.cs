@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using System.ComponentModel;
 
 namespace REST.Models
 {
@@ -13,17 +14,15 @@ namespace REST.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
         public int UtilizadorID { get; set; }
-        [Required]
         public int LocalidadeID { get; set; }
         [Required, MaxLength(255)]
         public string Descricao { get; set; }
-        [Required, MaxLength(255)]
+        [DefaultValue("Nova"), MaxLength(255)]
         public string Estado { get; set; }
         [Required, MaxLength(255)]
         public string Morada { get; set; }
-        [Required, MaxLength(255)]
+        [MaxLength(255)]
         public string Coordenadas { get; set; }
 
         [JsonIgnore, IgnoreDataMember]
