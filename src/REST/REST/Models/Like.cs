@@ -11,9 +11,9 @@ namespace REST.Models
 {
     public class Like
     {
-        [Column(Order = 0), Required, Key, ForeignKey("Utilizador")]
+        [Column(Order = 0), Key, ForeignKey("Utilizador")]
         public int UtilizadorId { get; set; }
-        [Column(Order = 1), Required, Key, ForeignKey("Ocorrencia")]
+        [Column(Order = 1), Key, ForeignKey("Ocorrencia")]
         public int OcorrenciaId { get; set; }
 
         [JsonIgnore, IgnoreDataMember]

@@ -11,9 +11,9 @@ namespace REST.Models
 {
     public class OcorrenciaTags
     {
-        [Column(Order = 0), Required, Key, ForeignKey("Ocorrencia")]
+        [Column(Order = 0), Key, ForeignKey("Ocorrencia")]
         public int OcorrenciaId { get; set; }
-        [Column(Order = 1), Required, Key, ForeignKey("Tag")]
+        [Column(Order = 1), Key, ForeignKey("Tag")]
         public int TagId { get; set; }
 
         [JsonIgnore, IgnoreDataMember]
