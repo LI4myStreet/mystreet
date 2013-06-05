@@ -59,6 +59,7 @@ public class NovaOcorrenciaActivity extends Activity {
 	private byte[] mImage;
 	private int mImageId;
 	private int mOcorrenciaId;
+	private String mTags;
 	
 	// UI references.
 	private EditText mDescricaoView;
@@ -68,6 +69,7 @@ public class NovaOcorrenciaActivity extends Activity {
 	private TextView mLoginStatusMessageView;
 	private Spinner mSpLocalidades;
 	private EditText mCoordenadasView;
+	private EditText mTagsView;
 	
 	// Alter window
 	private AlertDialog.Builder alertBuilder;
@@ -106,6 +108,7 @@ public class NovaOcorrenciaActivity extends Activity {
 		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
 
 		mCoordenadasView = (EditText) findViewById(R.id.etCoordenadas);
+		mTagsView = (EditText) findViewById(R.id.etTags);
 		
 		findViewById(R.id.btnAdicionar).setOnClickListener(
 				new View.OnClickListener() {
@@ -202,6 +205,7 @@ public class NovaOcorrenciaActivity extends Activity {
 		}
 		
 		mCoordenadas = mCoordenadasView.getText().toString();
+		mTags = mTagsView.getText().toString();
 		
 		// Show a progress spinner, and kick off a background task to
 		// perform the user login attempt.
@@ -273,6 +277,7 @@ public class NovaOcorrenciaActivity extends Activity {
 			ocorrencia.setLocalidadeID(mLocalidadeID);
 			ocorrencia.setMorada(mMorada);
 			ocorrencia.setUtilizadorID(MyStreeApplication.getUtilizador().getId());
+			ocorrencia.setTags(mTags);
 			mOcorrenciaId = MainActivity.restClient.criaOcorrencia(ocorrencia);
 			if(mOcorrenciaId > 0) {
 				if(mImage != null) mImageId = MainActivity.restClient.criaImagem(mImage);

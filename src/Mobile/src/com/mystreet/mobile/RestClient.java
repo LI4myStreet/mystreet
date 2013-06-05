@@ -66,6 +66,21 @@ public class RestClient {
 	public int criaOcorrencia(Ocorrencia ocorrencia) {
 		JSONObject jsonOcorrencia = new JSONObject();
 		try {
+			Collection<Tag> knownTags = getTags();
+			String tags[] = ocorrencia.getTags().split(" ");
+			ArrayList<Integer> tagIds = new ArrayList<Integer>();
+			for(String tag : tags) {
+				int id = -1;
+				for(Tag kTag : knownTags) {			
+					if(kTag.getDescricao().equals(tag)) {
+						id = kTag.getId();
+						continue;
+					}
+				}
+				if(id < 0) id = criaTag(tag);
+				if(id > 0) tagIds.add(id);
+			}
+			
 			jsonOcorrencia.put("Descricao", ocorrencia.getDescricao());
 			jsonOcorrencia.put("Morada", ocorrencia.getMorada());
 			jsonOcorrencia.put("Coordenadas", ocorrencia.getCoordenadas());
@@ -74,10 +89,43 @@ public class RestClient {
 			
 			String result = post("/ocorrencias/", jsonOcorrencia);
 			JSONObject jsonResult = new JSONObject(result);
+			int ocorrenciaId = jsonResult.getInt("Id");
+			
+			for(Integer tagId : tagIds) {
+				criaOcorrenciaTag(ocorrenciaId, tagId);
+			}
+			
 			Log.d("Post ocorrencias", "clean");
+			return ocorrenciaId;
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
+	public int criaTag(String tag) {
+		JSONObject jsonTag = new JSONObject();
+		try {
+			jsonTag.put("Descricao", tag);		
+			String result = post("/tags/", jsonTag);
+			JSONObject jsonResult = new JSONObject(result);
+			Log.d("Post imagens", "clean");
 			return jsonResult.getInt("Id");
 		} catch (Exception e) {
 			return 0;
+		}
+	}
+	
+	public boolean criaOcorrenciaTag(int ocorrenciaId, int tagId) {
+		JSONObject jsonOcorrenciaTag = new JSONObject();
+		try {
+			jsonOcorrenciaTag.put("TagId", tagId);
+			jsonOcorrenciaTag.put("OcorrenciaId", ocorrenciaId);
+			
+			post("/ocorrenciastags/", jsonOcorrenciaTag);
+			Log.d("Post ocorrenciastags", "clean");
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 	
@@ -120,7 +168,30 @@ public class RestClient {
 		} catch (JSONException e) {
 			Log.e("GetImages error", e.getLocalizedMessage());
 		}
+	}
+	
+	public Collection<Tag> getTags() {
+		String response = get("/tags/");
+		if(response == null) return new ArrayList<Tag>();
 		
+		try {
+			JSONArray jsonTags = new JSONArray(response);
+			ArrayList<Tag> ret = new ArrayList<Tag>();
+			for (int i=0; i < jsonTags.length(); i++)
+			{
+			    JSONObject o = jsonTags.getJSONObject(i);
+			    Tag t = new Tag();
+			    t.setId(o.getInt("Id"));
+			    t.setDescricao(o.getString("Descricao"));
+			    
+			    ret.add(t);
+			}
+			Log.d("GetTags out", jsonTags.toString());
+			return ret;
+		} catch (JSONException e) {
+			Log.e("GetTags error", e.getLocalizedMessage());
+		}
+		return new ArrayList<Tag>();
 	}
 	
 	public Collection<Ocorrencia> getOcorrencias() throws JSONException {

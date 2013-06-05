@@ -8,6 +8,7 @@ public class Ocorrencia {
     private String estado;
     private String morada;
     private String coordenadas;
+    private String tags;
 	
     public int getId() {
 		return id;
@@ -59,5 +60,13 @@ public class Ocorrencia {
 	}
 	public void setCoordenadas(String coordenadas) {
 		this.coordenadas = coordenadas;
-	}    
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
 }
