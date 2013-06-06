@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,7 +24,7 @@ import android.widget.ListView;
 public class MainActivity extends Activity {
 	public static RestClient restClient = new RestClient("http://10.0.2.2:2000/api");;
 	private AlertDialog.Builder alertBuilder;
-	private Collection<Ocorrencia> ocorrencias;
+	private ArrayList<Ocorrencia> ocorrencias;
 	private String filter;
 	
 	@Override
@@ -50,7 +51,16 @@ public class MainActivity extends Activity {
             	startActivity(i);
             }
         });
-        		
+        
+        final ListView lv = (ListView)findViewById(R.id.lvOcorrencias);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
+				Intent i = new Intent(getApplicationContext(), DetalheOcorrenciaActivity.class);
+				i.putExtra("id", ((Ocorrencia)lv.getAdapter().getItem(pos)).getId());
+            	startActivity(i);
+			}});
+        
 		new RestAsyncTask().execute();
 	}
 
@@ -123,17 +133,17 @@ public class MainActivity extends Activity {
 	void updateOcorrencias() {
 		ListView lv = (ListView)findViewById(R.id.lvOcorrencias);
 		
-		ArrayList<String> descricoes = new ArrayList<String>();
+		ArrayList<Ocorrencia> filtered = new ArrayList<Ocorrencia>();
 		
 		for(Ocorrencia o : ocorrencias) {
 			if(this.filter == null 
 					|| this.filter.equals("") 
 					|| o.getDescricao().toLowerCase(Locale.getDefault()).contains(this.filter.toLowerCase(Locale.getDefault()))) { 
-				descricoes.add(o.getDescricao());
+				filtered.add(o);
 			}
 		}
 		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.listview_row, descricoes);
+		ArrayAdapter<Ocorrencia> adapter = new ArrayAdapter<Ocorrencia>(this, R.layout.listview_row, filtered);
 	    lv.setAdapter(adapter);
 	}
 	
@@ -159,7 +169,7 @@ public class MainActivity extends Activity {
 				return;
 			}
 
-			MainActivity.this.ocorrencias = ocorrencias;
+			MainActivity.this.ocorrencias = new ArrayList<Ocorrencia>(ocorrencias);
 			updateOcorrencias();
 		}
 	}

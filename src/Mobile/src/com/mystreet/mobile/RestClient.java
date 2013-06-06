@@ -86,6 +86,7 @@ public class RestClient {
 			jsonOcorrencia.put("Coordenadas", ocorrencia.getCoordenadas());
 			jsonOcorrencia.put("LocalidadeID", ocorrencia.getLocalidadeID());
 			jsonOcorrencia.put("UtilizadorID", ocorrencia.getUtilizadorID());
+			jsonOcorrencia.put("Estado", "Reportado");
 			
 			String result = post("/ocorrencias/", jsonOcorrencia);
 			JSONObject jsonResult = new JSONObject(result);
@@ -194,6 +195,68 @@ public class RestClient {
 		return new ArrayList<Tag>();
 	}
 	
+	public Collection<OcorrenciaTag> getOcorrenciasTags(int ocorrenciaId) throws JSONException {
+		String response = get("/ocorrenciastags/"+Integer.toString(ocorrenciaId));
+		if(response == null) return new ArrayList<OcorrenciaTag>();
+		
+		JSONArray jsonTags = new JSONArray(response);
+		ArrayList<OcorrenciaTag> ret = new ArrayList<OcorrenciaTag>();
+		for (int i=0; i < jsonTags.length(); i++)
+		{
+		    JSONObject o = jsonTags.getJSONObject(i);
+		    OcorrenciaTag ot = new OcorrenciaTag();
+		    ot.setOcorrenciaId(o.getInt("OcorrenciaId"));
+		    ot.setTagId(o.getInt("TagId"));
+		    
+		    ret.add(ot);
+		}
+		Log.d("GetOcorrenciasTags out", jsonTags.toString());
+		return ret;
+	}
+	
+	public Tag getTag(int id) throws JSONException {
+		String response = get("/tags/"+Integer.toString(id));
+		if(response == null) return null;
+		
+	    JSONObject o = new JSONObject(response);
+	    // Pulling items from the array
+	    Tag tag = new Tag();
+	    tag.setId(o.getInt("Id"));
+	    tag.setDescricao(o.getString("Descricao"));
+	    
+		return tag;
+	}
+	
+	public Collection<ImagemOcorrencia> getImagensOcorrencias(int ocorrenciaId) throws JSONException {
+		String response = get("/imagensocorrencias/"+Integer.toString(ocorrenciaId));
+		if(response == null) return new ArrayList<ImagemOcorrencia>();
+		
+		JSONArray jsonTags = new JSONArray(response);
+		ArrayList<ImagemOcorrencia> ret = new ArrayList<ImagemOcorrencia>();
+		for (int i=0; i < jsonTags.length(); i++)
+		{
+		    JSONObject o = jsonTags.getJSONObject(i);
+		    ImagemOcorrencia io = new ImagemOcorrencia();
+		    io.setOcorrenciaId(o.getInt("OcorrenciaId"));
+		    io.setImagemId(o.getInt("ImagemId"));
+		    
+		    ret.add(io);
+		}
+		Log.d("GetImagensOcorrencias out", jsonTags.toString());
+		return ret;
+	}
+	
+	public byte[] getImagem(int id) throws JSONException {
+		String response = get("/imagens/"+Integer.toString(id));
+		if(response == null) return null;
+		
+	    JSONObject o = new JSONObject(response);
+	    // Pulling items from the array
+	    String encoded = o.getString("Bytes");
+	    
+		return Base64.decode(encoded, Base64.DEFAULT);
+	}
+	
 	public Collection<Ocorrencia> getOcorrencias() throws JSONException {
 		String response = get("/ocorrencias/");
 		if(response == null) return new ArrayList<Ocorrencia>();
@@ -219,6 +282,75 @@ public class RestClient {
 		return ret;
 	}
 	
+	public Ocorrencia getOcorrencia(int id) throws JSONException {
+		String response = get("/ocorrencias/"+Integer.toString(id));
+		if(response == null) return null;
+		
+	    JSONObject o = new JSONObject(response);
+	    // Pulling items from the array
+	    Ocorrencia ocorrencia = new Ocorrencia();
+	    ocorrencia.setId(o.getInt("Id"));
+	    ocorrencia.setUtilizadorID(o.getInt("UtilizadorID"));
+	    ocorrencia.setLocalidadeID(o.getInt("LocalidadeID"));
+	    ocorrencia.setDescricao(o.getString("Descricao"));
+	    ocorrencia.setEstado(o.getString("Estado"));
+	    ocorrencia.setMorada(o.getString("Morada"));
+	    ocorrencia.setCoordenadas(o.getString("Coordenadas"));
+	    
+	    ocorrencia.setUtilizador(getUtilizador(ocorrencia.getUtilizadorID()));
+	    
+	    StringBuilder tagsBuilder = new StringBuilder();
+	    for(OcorrenciaTag ot : getOcorrenciasTags(ocorrencia.getId())) {
+	    	tagsBuilder.append(getTag(ot.getTagId()).getDescricao());
+	    	tagsBuilder.append(" ");
+	    }
+	    if(tagsBuilder.length() > 0) tagsBuilder.deleteCharAt(tagsBuilder.length()-1);
+	    
+	    ocorrencia.setTags(tagsBuilder.toString());
+	    
+	    Collection<ImagemOcorrencia> imagens = getImagensOcorrencias(ocorrencia.getId());
+	    if(imagens.size() > 0) {
+	    	ImagemOcorrencia firstImage = (ImagemOcorrencia)imagens.toArray()[0];
+	    	ocorrencia.setImage(getImagem(firstImage.getImagemId()));
+	    }
+	    
+	    Localidade localidade = getLocalidade(ocorrencia.getLocalidadeID());
+	    if(localidade != null) ocorrencia.setLocalidade(localidade.getNome());
+	    
+	    Collection<Comentario> comentarios = getComentarios(ocorrencia.getId());
+	    if(comentarios != null && comentarios.size() > 0) ocorrencia.setComentarios(new ArrayList<Comentario>(comentarios));
+	    
+		return ocorrencia;
+	}
+	
+	public Utilizador getUtilizador(int id) throws JSONException {
+		String response = get("/utilizadores/"+Integer.toString(id));
+		if(response == null) return null;
+		
+	    JSONObject o = new JSONObject(response);
+	    // Pulling items from the array
+	    Utilizador utilizador = new Utilizador();
+	    utilizador.setId(o.getInt("Id"));
+	    utilizador.setNome(o.getString("Nome"));
+	    
+		return utilizador;
+	}
+	
+	public Localidade getLocalidade(int id) throws JSONException {
+		String response = get("/localidades/"+Integer.toString(id));
+		if(response == null) return null;
+		
+	    JSONObject o = new JSONObject(response);
+	    // Pulling items from the array
+	    Localidade localidade = new Localidade();
+	    localidade.setId(o.getInt("ID"));
+	    localidade.setNome(o.getString("Nome"));
+	    
+	    Log.d("GetLocalidadeById", o.toString());
+	    
+		return localidade;
+	}
+	
 	public Collection<Localidade> getLocalidades() throws JSONException {
 		String response = get("/localidades/");
 		if(response == null) return new ArrayList<Localidade>();
@@ -235,6 +367,24 @@ public class RestClient {
 		    ret.add(localidade);
 		}
 		
+		return ret;
+	}
+	
+	public Collection<Comentario> getComentarios(int ocorrenciaId) throws JSONException {
+		String response = get("/comentarios/?ocorrenciaId="+Integer.toString(ocorrenciaId));
+		if(response == null) return new ArrayList<Comentario>();
+		
+		JSONArray jsonTags = new JSONArray(response);
+		ArrayList<Comentario> ret = new ArrayList<Comentario>();
+		for (int i=0; i < jsonTags.length(); i++)
+		{
+		    JSONObject o = jsonTags.getJSONObject(i);
+		    Comentario c = new Comentario();
+		    c.setConteudo(o.getString("Conteudo"));
+		    
+		    ret.add(c);
+		}
+		Log.d("GetComentarios out", jsonTags.toString());
 		return ret;
 	}
 	

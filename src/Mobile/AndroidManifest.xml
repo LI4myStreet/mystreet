@@ -53,6 +53,10 @@
             android:name="com.mystreet.mobile.NovaOcorrenciaActivity"
             android:label="@string/title_activity_nova_ocorrencia" >
         </activity>
+        <activity
+            android:name="com.mystreet.mobile.DetalheOcorrenciaActivity"
+            android:label="@string/title_activity_detalhe_ocorrencia" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,8 @@
 package com.mystreet.mobile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ocorrencia {
     private int id;
     private int utilizadorID;
@@ -9,6 +12,11 @@ public class Ocorrencia {
     private String morada;
     private String coordenadas;
     private String tags;
+    private byte[] image;
+    
+    private Utilizador utilizador;
+    private String localidade;
+    private List<Comentario> comentarios = new ArrayList<Comentario>();
 	
     public int getId() {
 		return id;
@@ -68,5 +76,42 @@ public class Ocorrencia {
 
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+	
+	public Utilizador getUtilizador() {
+		return utilizador;
+	}
+
+	public void setUtilizador(Utilizador utilizador) {
+		this.utilizador = utilizador;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	
+	public String getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
+	}
+	
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
+	@Override
+	public String toString() {
+		return this.descricao;
 	}
 }
