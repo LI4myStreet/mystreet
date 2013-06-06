@@ -9,9 +9,11 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using REST.Models;
+using REST.App_Start;
 
 namespace REST.Controllers
 {
+    [AllowCrossSiteJson]
     public class TagsController : ApiController
     {
         private MyStreetContext db = new MyStreetContext();
