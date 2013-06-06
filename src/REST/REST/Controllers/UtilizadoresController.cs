@@ -33,6 +33,8 @@ namespace REST.Controllers
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
+            utilizador.Password = "";
+
             return utilizador;
         }
 

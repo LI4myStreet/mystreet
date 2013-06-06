@@ -34,6 +34,12 @@ namespace REST.Controllers
             return comentario;
         }
 
+        // GET api/Comentarios/5
+        public IEnumerable<Comentario> GetComentarios(int ocorrenciaId)
+        {
+            return db.Comentarios.Where(c => c.OcorrenciaId == ocorrenciaId);
+        }
+
         // PUT api/Comentarios/5
         public HttpResponseMessage PutComentario(int id, Comentario comentario)
         {

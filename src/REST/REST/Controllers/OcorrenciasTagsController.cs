@@ -24,15 +24,10 @@ namespace REST.Controllers
         }
 
         // GET api/OcorrenciasTags/5
-        public OcorrenciaTags GetOcorrenciaTags(int id)
+        public IEnumerable<OcorrenciaTags> GetOcorrenciaTags(int id)
         {
-            OcorrenciaTags ocorrenciatags = db.OcorrenciasTags.Find(id);
-            if (ocorrenciatags == null)
-            {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
-            }
-
-            return ocorrenciatags;
+            var ocorrenciastags = db.OcorrenciasTags.Where(o => o.OcorrenciaId == id);
+            return ocorrenciastags.AsEnumerable();
         }
 
         // PUT api/OcorrenciasTags/5

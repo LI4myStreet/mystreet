@@ -24,15 +24,10 @@ namespace REST.Controllers
         }
 
         // GET api/ImagensOcorrencias/5
-        public ImagemOcorrencia GetImagemOcorencia(int id)
+        public IEnumerable<ImagemOcorrencia> GetImagemOcorencia(int id)
         {
-            ImagemOcorrencia imagemocorencia = db.ImagensOcorrencias.Find(id);
-            if (imagemocorencia == null)
-            {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
-            }
-
-            return imagemocorencia;
+            var imagensocorrencias = db.ImagensOcorrencias.Where(o => o.OcorrenciaId == id);
+            return imagensocorrencias.AsEnumerable();
         }
 
         // PUT api/ImagensOcorrencias/5
