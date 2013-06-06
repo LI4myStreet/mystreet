@@ -36,7 +36,7 @@ namespace myStreet.Account
             usr.Morada="Morada de teste";
             usr.Nome="Nome Teste";
             usr.Password= "123456";
-            usr.Tipo= "N";
+            usr.Tipo= 1;
             usr.Username= "teste";
 
             string endPoint = @"https://localhost:44300/api/utilizadores";

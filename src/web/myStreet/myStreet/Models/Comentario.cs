@@ -2,62 +2,74 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace myStreet.Models
 {
     public class Comentario
     {
-        int ID { get; set; }
-        int UtilID { get; set; }
-        int OID { get; set; }
-        string Conteudo { get; set; }
-        string ImgID { get; set; }
+        public int Id { get; set; }
+        public int UtilizadorId { get; set; }
+        public int OcorrenciaId { get; set; }
+        public int ImagemId { get; set; }
+        public string Conteudo { get; set; }
 
+        [JsonIgnore, IgnoreDataMember]
+        public Utilizador Utilizador { get; set; }
+
+        [JsonIgnore, IgnoreDataMember]
+        public Ocorrencia Ocorrencia { get; set; }
+
+        [JsonIgnore, IgnoreDataMember]
+        public Imagem Imagem { get; set; }
+        
         public Comentario()
         {
-            ID = -1;
-            UtilID = -1;
-            OID = -1;
+            Id = -1;
+            UtilizadorId = -1;
+            OcorrenciaId = -1;
             Conteudo = "";
-            ImgID = "";
+            ImagemId = -1;
         }
 
         public Comentario(int uid, int oid, string conteudo)
         {
-            this.UtilID = uid;
-            this.OID = oid;
+            this.UtilizadorId = uid;
+            this.OcorrenciaId = oid;
             this.Conteudo = conteudo;
-            ImgID = "";
+            ImagemId = -1;
         }
 
-        public Comentario(int uid, int oid, string conteudo, string imgid)
+        public Comentario(int uid, int oid, string conteudo, int imgid)
         {
-            this.UtilID = uid;
-            this.OID = oid;
+            this.UtilizadorId = uid;
+            this.OcorrenciaId = oid;
             this.Conteudo = conteudo;
-            this.ImgID = imgid;
+            this.ImagemId = imgid;
         }
 
         public Comentario(Comentario c)
         {
-            this.ID = c.ID;
-            this.UtilID = c.UtilID;
-            this.OID = c.OID;
+            this.Id = c.Id;
+            this.UtilizadorId = c.UtilizadorId;
+            this.OcorrenciaId = c.OcorrenciaId;
             this.Conteudo = c.Conteudo;
-            this.ImgID = c.ImgID;
+            this.ImagemId = c.ImagemId;
         }
 
         public override string ToString()
         {
-            return string.Format("Comentario: \nConteudo: {0}\nImagem: {1}\n",Conteudo,ImgID);
+            return string.Format("Comentario: \nConteudo: {0}\nImagem: {1}\n",Conteudo,ImagemId);
         }
 
-        public override bool Equals(object obj)
+        public bool Compara(object obj)
         {
             if (obj == null) return false;
             Comentario c = obj as Comentario;
             if ((object)c == null) return false;
-            if (ID==c.ID&&UtilID==c.UtilID&&OID==c.OID&&Conteudo.Equals(c.Conteudo)&&ImgID.Equals(c.ImgID)) return true;
+            if (Id==c.Id&&UtilizadorId==c.UtilizadorId&&OcorrenciaId==c.OcorrenciaId&&Conteudo.Equals(c.Conteudo)&&ImagemId.Equals(c.ImagemId)) return true;
             return false;
         }
 

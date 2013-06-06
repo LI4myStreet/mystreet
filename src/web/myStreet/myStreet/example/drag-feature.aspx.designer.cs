@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace myStreet {
+namespace myStreet.example {
     
     
-    public partial class Default {
+    public partial class drag_feature {
     }
 }
