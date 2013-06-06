@@ -9,9 +9,11 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using REST.Models;
+using REST.App_Start;
 
 namespace REST.Controllers
 {
+    [AllowCrossSiteJson]
     public class ComentariosController : ApiController
     {
         private MyStreetContext db = new MyStreetContext();
@@ -32,6 +34,12 @@ namespace REST.Controllers
             }
 
             return comentario;
+        }
+
+        public IEnumerable<Comentario> GetComentariosOcorrencia(int ocorrenciaid)
+        {
+            return db.Comentarios.Where(
+                (o) => (o.OcorrenciaId == ocorrenciaid));
         }
 
         // PUT api/Comentarios/5
