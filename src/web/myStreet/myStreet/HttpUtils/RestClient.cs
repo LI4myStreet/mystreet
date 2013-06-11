@@ -50,6 +50,14 @@ namespace myStreet.HttpUtils
             PostData = postData;
         }
 
+        public RestClient(string endpoint, HttpVerb method, string postData,string contenttype)
+        {
+            EndPoint = endpoint;
+            Method = method;
+            ContentType = contenttype;
+            PostData = postData;
+        }
+
 
         public string MakeRequest()
         {

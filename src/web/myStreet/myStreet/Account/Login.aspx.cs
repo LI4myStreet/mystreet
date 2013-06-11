@@ -43,6 +43,7 @@ namespace myStreet.Account
 
                 if (utilizador != null)
                 {
+                    Models.Global.CurrentUser = utilizador;
                     FormsAuthentication.RedirectFromLoginPage(utilizador.Username, LoginUser.RememberMeSet);
                     //Response.Redirect("~/Default.aspx?un=" + LoginUser.UserName.ToString());
                 }

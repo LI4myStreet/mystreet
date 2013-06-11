@@ -54,14 +54,16 @@
                 }, 
 
                 onClick: function(evt) {
-                    var msg = "click " + evt.xy;
-                    alert(msg);
+                    document.getElementById("create_ocurrence").setAttribute("style", "display: none;");
+                    ResetNewOcurrence();
                 },
 
                 onDblclick: function(evt) {  
                     var position = map.getLonLatFromPixel(evt.xy);
                     map.setCenter(position);
                     addMarker(position);
+                    document.getElementById("create_ocurrence").setAttribute("style", "display: inline;");
+                    document.getElementById("coordenadas").value = position.toShortString();
                 }   
 
               });
@@ -175,9 +177,14 @@
 //                    markerslayer.addMarker(new OpenLayers.Marker(position,icon));
 //                });
                 map.zoomTo(10);
-
+                ResetNewOcurrence();
 //                document.getElementById('noneToggle').checked = true;
                 toggleControlAux('click');
+
+                $('#new_ocurrence').submit(function () {
+                    SubmeterOcorrencia();
+                    return false;
+                });
             }
 
             function addMarker(position) {
@@ -187,14 +194,36 @@
                     var icon = new OpenLayers.Icon('/Scripts/img/marker.png', size, offset);   
                     var markerslayer = map.getLayer('Markers');
                     
-                    var popup = new OpenLayers.Popup.FramedCloud("Popup",
-                                position,
-                                null,
-                                '<div>Hello World! Put your html here</div>',
-                                null,
-                                false);
-                    map.addPopup(popup);
-                    popup.show();
+                    var marker = new OpenLayers.Marker(position,icon,null);
+
+                    //here add mouseover event
+                        marker.events.register('mouseover', marker, function(evt) {
+                           map.addPopup(popup);
+                           popup.show();
+                        });
+                        //here add mouseout event
+                        marker.events.register('mouseout', marker, function(evt) {popup.hide();});
+                        markerslayer.addMarker(marker);
+                    
+//                    var popup = new OpenLayers.Popup.FramedCloud("Popup",
+//                                position,
+//                                null,
+//                                '<div>Hello World! Put your html here</div>',
+//                                null,
+//                                false);
+//                    map.addPopup(popup);
+//                    popup.show();
+            }
+
+            function ResetNewOcurrence(){
+                var markerslayer = map.getLayer('Markers');
+                document.getElementById("create_ocurrence").setAttribute("style", "display: none;");
+                document.getElementById("descricao").value = "";
+                document.getElementById("morada").value = "";
+                document.getElementById("localidade").value = "";
+                document.getElementById("coordenadas").value = "";
+                document.getElementById("fotografia").value = "";
+
             }
 
             function loadMarkers() {
@@ -204,11 +233,12 @@
                     var icon = new OpenLayers.Icon('/Scripts/img/marker.png', size, offset);   
                     var markerslayer = map.getLayer('Markers');
                     var ocorrencias = getOcorrencias();
+                    var marker;
 
                     for (ocor in ocorrencias)
                     {
                         position = OpenLayers.LonLat.fromString(ocorrencias[ocor].Coordenadas);
-                        var marker = new OpenLayers.Marker(position,icon,ocorrencias[ocor]);
+                        marker = new OpenLayers.Marker(position,icon,ocorrencias[ocor]);
 
 //                        marker.events.register("click", marker, (function(e){
 //                             popup = new OpenLayers.Popup.FramedCloud("chicken",
@@ -241,7 +271,7 @@
             }
 
             function buildOcorrencyInfo(oc){
-                var comentarios = getComentarios();
+                var comentarios = getComentarios(oc.Id);
                 
                 var div = document.createElement('div');
                 div.innerHTML = "<h1>" + oc.Descricao + "</h1>";
@@ -286,13 +316,13 @@
         return ocorrencias; 
             }
 
-             function getComentarios(){
+             function getComentarios(ocID){
                     var comentarios = (function () {
                     var comentarios = null;
                     $.ajax({
                        'async': false,
                        'global': false,
-                       'url': restHost + 'comentarios/',
+                       'url': restHost + 'comentarios/' + '?ocorrenciaId=' + ocID,
                        'dataType': "json",
                        'success': function (data) {
                             comentarios = $.parseJSON(JSON.stringify(data));
@@ -324,21 +354,88 @@
                     }
                 }
             }
+
+            function SubmeterOcorrencia(){
+                    var oc = { 
+                        Estado : "Em estudo",
+                        Coordenadas : document.getElementById("coordenadas").value ,
+                        Descricao : document.getElementById("descricao").value,
+                        LocalidadeID : 1,
+                        Morada : document.getElementById("morada").value,
+                        UtilizadorID : 1
+                    }
+                var json = JSON.stringify(oc);
+
+                console.log(json);
+
+                addOcorrencia(json);
+
+                document.getElementById("create_ocurrence").setAttribute("style", "display: none;");
+                return false;
+            }
+
+            function addOcorrencia(json){
+                    $.post(restHost + 'ocorrencias/', json, "", "json");
+
+//                    var request;
+//                    request = $.ajax({
+//                       'type': "POST",
+//                       'async': false,
+//                       'global': false,
+//                       'url': restHost + 'ocorrencias/',
+//                       'dataType': "json",
+//                       'data' : json
+//                    });
+
+//                       // callback handler that will be called on success
+//                    request.done(function (response, textStatus, jqXHR){
+//                        // log a message to the console
+//                        console.log("Hooray, it worked!");
+//                    });
+
+//                // callback handler that will be called on failure
+//                request.fail(function (jqXHR, textStatus, errorThrown){console.log("Deu erro!");  });
+             }
+
     </script>
 </head>
 <body onload="init()">
     <h1 id="title">
-        Drag Feature Example</h1>
-    <div id="tags">
-        point, line, linestring, polygon, digitizing, geometry, draw, drag
-    </div>
-    <p id="shortdesc">
-        Demonstrates point, line and polygon creation and editing.
-    </p>
+        myStreet</h1>
     <div id="map" class="smallmap">
     </div>
-    <div id="create_ocurrence" class="create_ocurrence">
-        
+    <div id="create_ocurrence" class="create_ocurrence" style="display: none;">
+        <form id="new_ocurrence" class="new_ocurrence" runat="server">
+        <fieldset>
+          <h2><legend>Adicionar Ocorrência</legend></h2>
+          <div>
+            <label for="Descricao">Descrição:</label>
+            <input type="text" id="descricao" name="Descricao" value="" runat="server" />
+          </div>
+          <div>
+            <label for="Morada">Morada:</label>
+            <input type="text" id="morada" name="Morada" value="" runat="server" />
+          </div>
+          <div>
+            <label for="Localidade">Localidade:</label>
+            <input id="localidade" type="text" name="Localidade" value="" runat="server" />
+          </div>
+          <div>
+            <label for="Coordenadas">Coordenadas:</label>
+            <input id="coordenadas" type="text" name="Coordenadas" readonly="readonly" value="" runat="server" />
+          </div>
+          <div>
+            <label for="Fotografia">Fotografia:</label>
+            <input type="text" id="fotografia" name="Fotografia" value="" runat="server" />
+            <input type="submit" value="Procurar"/>
+          </div>
+          <div>
+            <label>&nbsp;</label>
+            <input type="submit" value="Criar" class="submit"/>
+            <%--<asp:Button type="submit" Text="Criar" class="submit" onclick="SubmeterOcorrencia" runat="server" />--%>
+          </div>
+        </fieldset>
+      </form>   
     </div>
 
 
